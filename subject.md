@@ -192,89 +192,138 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 
 **Questions**
 - How does air cooling work?
+Par convection, l'élément chaud rechauffe l'air autour de lui, avec un ventilateur ou autre, l'air chaud est chassé, réablissant le déséquilibre de température. Le second principe de thermodynamique prend le relai en refroidissant l'élément chaud et en rechauffant l'air et ainsi de suite.
 - Heat sink design principles
+Le but est d'optimisé la surface d'échange thermique entre l'élément chaud et l'air
 - What are the limits?
+Le refroissiement par convection a rendement plus faible que par conduction.
 - When does air cooling fail?
+Si l'air ambiant est chaud, celui-ci peut ne plus absorber assez de chaleur pour refroidir efficacement l'élément chaud
 - At what TDP does air become impractical?
+~750 W
 - What are the acoustic limits?
+~75dB
 - How does altitude affect air cooling?
++altitude = air moins dense = refroidissmeent moins efficace pour un même volume d'air = débit plus élévé nécessaire
 
 | Air Cooling Aspect | Typical Value | Limit |
 |---|---:|---:|
-| Max heat dissipation per GPU | ? | ? |
-| Max rack density | ? | ? |
-| Airflow per rack | ? | ? |
-| Fan power overhead | ? | ? |
+| Max heat dissipation per GPU | 400–600 W | ~700–800 W |
+| Max rack density | 20–40 kW | ~50 kW |
+| Airflow per rack | 85–170 $m^3m^{-1}$ | ~225 $m^3m^{-1}$  |
+| Fan power overhead | 5–10% | ~15% |
+
+Sources:
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/high-density-data-center-cooling/
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
+ - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
 
 ### Direct Liquid Cooling (DLC)
 
 **How does DLC work?**
 - Cold plate design and attachment
+plaque métallique en contact direct avec GPU, chaleur transférée au fluide
 - Manifold and distribution systems
+réseaux de tuyauterie qui distribuent le fluide vers chaque cold plate.
 - Coolant types and flow rates
+eau/glycol ou fluides diélectriques, débit optimisé pour ΔT cible.
 - Heat rejection (CDU, dry coolers, cooling towers)
+CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou tours).
 
 | DLC Component | Function | Key Specifications |
 |---|---|---|
-| Cold plate | ? | ? |
-| Manifold | ? | ? |
-| Quick disconnects | ? | ? |
-| CDU (Coolant Distribution Unit) | ? | ? |
-| Facility water loop | ? | ? |
+| Cold plate | Transfert de chaleur du GPU vers le liquide | Surface alu/cuivre, low ΔT |
+| Manifold | Distribution du fluide aux cold plates | Multi-port, équilibrage de débit |
+| Quick disconnects | Connexions sans fuite pour maintenance | ≤ 0.5% fuite, haute pression |
+| CDU (Coolant Distribution Unit) | Pompe + échangeur + filtration | Débit 10–100 L/min, filtres |
+| Facility water loop | Rejet de chaleur vers le bâtiment | Dry coolers ou cooling towers |
+
 
 | Aspect | Air Cooling | Direct Liquid Cooling |
 |---|---|---|
-| Max GPU TDP supported | ? | ? |
-| Max rack density | ? | ? |
-| PUE impact | ? | ? |
-| Maintenance complexity | ? | ? |
-| Capital cost | ? | ? |
-| Operating cost | ? | ? |
+| Max GPU TDP supported | ~700–800 W | ~1500+ W |
+| Max rack density | ~40–50 kW | ~100–200+ kW |
+| PUE impact | Higher overhead | Lower overhead |
+| Maintenance complexity | Low | Medium/High |
+| Capital cost | Lower | Higher (install + CDU) |
+| Operating cost | Higher fan energy | Lower pumping energy |
+
+Sources:
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
+ - https://www.nvidia.com/en-us/data-center/energy-efficiency/
+ - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
+ - https://www.coolingbestpractices.com/knowledge_center/whitepapers/direct_liquid_cooling
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
+
 
 ### Coolant types
 
 | Coolant | Thermal Properties | Cost | Safety | Use Case |
 |---|---|---|---|---|
-| Water/glycol | ? | ? | ? | ? |
-| Propylene glycol | ? | ? | ? | ? |
-| Dielectric fluids | ? | ? | ? | ? |
+| Water/glycol | Very high heat capacity, high thermal conductivity | Low | Conductive, leak risk | Cold plates, DLC loops |
+| Propylene glycol | Slightly lower than water, freeze protection | Low–Medium | Less toxic than ethylene glycol | Cold climates, DLC |
+| Dielectric fluids | Lower than water, electrically insulating | High | Non-conductive, safer for electronics | Immersion cooling |
 
 ### Immersion Cooling
 
 **Topics**
-- Single-phase vs two-phase
-- Tank design and fluid management
-- Heat rejection methods
-- Maintenance considerations
+- Single-phase vs two-phase  
+- Tank design and fluid management  
+- Heat rejection methods  
+- Maintenance considerations  
 
 | Aspect | Single-Phase Immersion | Two-Phase Immersion |
 |---|---|---|
-| Fluid type | ? | ? |
-| Operating principle | ? | ? |
-| Max heat flux | ? | ? |
-| Fluid cost | ? | ? |
-| Complexity | ? | ? |
-| Maturity | ? | ? |
+| Fluid type | Dielectric oil | Low-boiling dielectric fluid |
+| Operating principle | Liquid absorbs heat, stays liquid | Liquid boils, vapor condenses |
+| Max heat flux | High | Very high |
+| Fluid cost | Medium | High |
+| Complexity | Medium | High |
+| Maturity | Commercially mature | Emerging / niche |
 
 | Advantage | Challenge |
 |---|---|
-| Highest heat density | ? |
-| No fans required | ? |
-| Reduced PUE | ? |
-| Component longevity | ? |
+| Highest heat density | Specialized fluids |
+| No fans required | Hardware compatibility |
+| Reduced PUE | Higher CAPEX |
+| Component longevity | Maintenance procedures |
+
+Sources:
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+ - https://www.submer.com/immersion-cooling/  
+ - https://www.grcooling.com/immersion-cooling/  
+ - https://www.3m.com/3M/en_US/data-center-us/solutions/liquid-cooling/  
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
+
 
 ### Rear-Door Heat Exchangers (RDHx)
 
 **Questions**
-- What is RDHx?
-- How does it supplement air cooling?
-- What densities can it support?
-- When is it the right choice?
+- What is RDHx?  
+  Un échangeur thermique air-liquide monté à l’arrière d’un rack qui capte l’air chaud sortant et en extrait la chaleur via un circuit d’eau.
+
+- How does it supplement air cooling?  
+  Il refroidit l’air directement au niveau du rack, réduisant la charge thermique de la salle et améliorant l’efficacité du refroidissement à air existant.
+
+- What densities can it support?  
+  Environ 20 000 à 80 000 W par rack selon le type (passif ou actif).
+
+- When is it the right choice?  
+  Lorsqu’un datacenter refroidi à l’air doit supporter des racks plus denses sans passer immédiatement au liquid cooling direct ou à l’immersion.
 
 | RDHx Type | Cooling Capacity | Best For |
 |---|---:|---|
-| Passive RDHx | ? | ? |
-| Active RDHx | ? | ? |
+| Passive RDHx | ~20 000–35 000 W par rack | Racks densité moyenne, retrofit |
+| Active RDHx | ~30 000–80 000 W par rack | Racks haute densité (GPU) |
+
+Sources:
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/rear-door-heat-exchangers/  
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/rear-door-heat-exchanger/  
+ - https://www.asetek.com/liquid-cooling/technologies/rear-door-heat-exchanger/  
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+
 
 ---
 
@@ -287,50 +336,64 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 - 1 PUE = (IT Load + Cooling + Power Distribution + Lighting + Other) / IT Load
 
 **Questions**
-- What does PUE measure and not measure?
-- What are the components of overhead?
-- How does cooling choice affect PUE?
+- What does PUE measure and not measure?  
+  PUE mesure l’efficacité énergétique de l’infrastructure du datacenter mais ne mesure pas l’efficacité des applications, des serveurs ou de l’usage des ressources IT.
+
+- What are the components of overhead?  
+  Refroidissement, pertes de distribution électrique, UPS, éclairage, sécurité, auxiliaires.
+
+- How does cooling choice affect PUE?  
+  Les solutions liquid cooling réduisent fortement l’énergie dédiée au refroidissement, ce qui diminue le PUE.
 
 | PUE Component | Typical % of Overhead | Reduction Strategies |
 |---|---:|---|
-| Cooling | ? | ? |
-| Power distribution losses | ? | ? |
-| Lighting and other | ? | ? |
+| Cooling | 40–60 % | DLC, free cooling, confinement |
+| Power distribution losses | 10–15 % | Haut rendement UPS/PSU |
+| Lighting and other | 5 % | LED, automatisation |
 
 **PUE benchmarks**
 
 | Datacenter Type | Typical PUE | Best-in-Class PUE |
 |---|---:|---:|
-| Legacy enterprise | ? | ? |
-| Modern enterprise | ? | ? |
-| Hyperscale (air) | ? | ? |
-| Hyperscale (DLC) | ? | ? |
-| AI-optimized | ? | ? |
+| Legacy enterprise | 1.8–2.5 | 1.6 |
+| Modern enterprise | 1.4–1.6 | 1.3 |
+| Hyperscale (air) | 1.2–1.4 | 1.1 |
+| Hyperscale (DLC) | 1.1–1.2 | 1.05 |
+| AI-optimized | 1.1–1.3 | 1.05 |
 
 | Cooling Method | Typical PUE | Why |
 |---|---:|---|
-| Traditional air (CRAC) | ? | ? |
-| Hot/cold aisle containment | ? | ? |
-| Free air cooling | ? | ? |
-| Direct liquid cooling | ? | ? |
-| Immersion cooling | ? | ? |
+| Traditional air (CRAC) | ~1.6 | Compresseurs énergivores |
+| Hot/cold aisle containment | ~1.4 | Airflow optimisé |
+| Free air cooling | ~1.2 | Peu de refroidissement actif |
+| Direct liquid cooling | ~1.1 | Transfert thermique direct |
+| Immersion cooling | ~1.05 | Quasi suppression HVAC |
 
 **Best-in-class examples**
 
 | Company | Facility | PUE | How Achieved |
 |---|---|---:|---|
-| Google | ? | ? | ? |
-| Meta | ? | ? | ? |
-| Microsoft | ? | ? | ? |
-| NVIDIA DGX Cloud | ? | ? | ? |
+| Google | Hyperscale DC | 1.10 | Free cooling + AI control |
+| Meta | Hyperscale DC | 1.09 | Free cooling |
+| Microsoft | Azure DC | 1.12 | Free air + DLC |
+| NVIDIA DGX Cloud | AI DC | ~1.1 | Liquid cooling |
 
 **Beyond PUE: other efficiency metrics**
 
 | Metric | Definition | Typical Values | Best-in-Class |
 |---|---|---|---|
-| PUE | ? | ? | ? |
-| WUE | ? | ? | ? |
-| CUE | ? | ? | ? |
+| PUE | Ratio total/IT | 1.1–1.6 | ~1.05 |
+| WUE | L d’eau / kWh IT | 0.2–1.8 | <0.2 |
+| CUE | kgCO₂ / kWh IT | Variable | Near zero |
+
+Sources:
+ - https://uptimeinstitute.com/resources/what-is-pue  
+ - https://www.google.com/about/datacenters/efficiency/  
+ - https://engineering.fb.com/2020/03/12/data-center-engineering/data-center-efficiency/  
+ - https://learn.microsoft.com/en-us/azure/sustainability/  
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+ - https://www.iea.org/reports/data-centres-and-data-transmission-networks
+
 
 ---
 
@@ -339,79 +402,101 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 ### Power Density Planning
 
 **Questions**
-- How do you plan for increasing density?
-- What infrastructure upgrades are needed?
-- How do you handle mixed densities?
+- How do you plan for increasing density?  
+  Modular power and cooling, oversizing pathways, liquid-ready racks.
+- What infrastructure upgrades are needed?  
+  Higher-capacity busways, transformers, UPS, liquid cooling loops.
+- How do you handle mixed densities?  
+  Zoning: air-cooled rows + liquid-cooled rows.
 
 | Density Tier | kW/Rack | Infrastructure Requirements |
 |---|---:|---|
-| Low density | ? | ? |
-| Medium density | ? | ? |
-| High density | ? | ? |
-| Ultra-high density | ? | ? |
+| Low density | 5 000–10 000 W | Air cooling, standard power |
+| Medium density | 10 000–30 000 W | Hot/cold aisle, high airflow |
+| High density | 30 000–80 000 W | RDHx or DLC |
+| Ultra-high density | >80 000 W | DLC or immersion |
+
+---
 
 ### Power distribution architecture
 
 | Component | Function | Sizing Consideration |
 |---|---|---|
-| Utility feed | ? | ? |
-| Main switchgear | ? | ? |
-| UPS systems | ? | ? |
-| PDUs | ? | ? |
-| RPPs (Remote Power Panels) | ? | ? |
+| Utility feed | Power from grid | Peak MW + redundancy |
+| Main switchgear | Distribution & protection | Fault current rating |
+| UPS systems | Backup & conditioning | MW load, minutes runtime |
+| PDUs | Rack-level distribution | kW per rack |
+| RPPs | Branch circuits | Density zones |
+
+---
 
 ### Cooling Capacity Planning
 
 | Cooling capacity Unit | Conversion | Context |
 |---|---|---|
-| 1 ton of cooling | ? BTU/hr | ? kW |
-| 1 kW IT load (air) | ? tons | Includes overhead |
-| 1 kW IT load (DLC) | ? tons | Direct rejection |
+| 1 ton of cooling | 12 000 BTU/h | 3.52 kW |
+| 1 kW IT load (air) | 0.0003 ton | Includes overhead |
+| 1 kW IT load (DLC) | 0.00028 ton | Direct rejection |
 
 **Water requirements for liquid cooling**
 
-| Cooling Method | Water Usage | GPM per MW |
+| Cooling Method | Water Usage | m³/h per MW |
 |---|---|---:|
-| Evaporative (cooling tower) | ? | ? |
-| Dry cooler | ? | ? |
-| DLC (closed loop) | ? | ? |
+| Evaporative (cooling tower) | High | 1.5–2 |
+| Dry cooler | Low | 0.1–0.3 |
+| DLC (closed loop) | Very low | ~0.05 |
+
+---
 
 ### Backup Power Systems
 
 | UPS Type | Efficiency | Runtime | Best For |
 |---|---:|---:|---|
-| Double conversion | ? | ? | ? |
-| Line interactive | ? | ? | ? |
-| Rotary UPS | ? | ? | ? |
-| Battery + flywheel | ? | ? | ? |
+| Double conversion | 94–97% | 5–15 min | Critical loads |
+| Line interactive | 96–98% | 5–10 min | Edge DC |
+| Rotary UPS | 96–98% | Seconds | Large DC |
+| Battery + flywheel | 95–98% | Seconds–minutes | High power |
 
 **Generator requirements**
 
 | Facility Size | Generator Capacity | Fuel Storage | Startup Time |
 |---:|---|---|---|
-| 10 MW | ? | ? | ? |
-| 100 MW | ? | ? | ? |
-| 500 MW | ? | ? | ? |
-| 1 GW | ? | ? | ? |
+| 10 MW | 10–12 MW | Hours | <10 s |
+| 100 MW | 120 MW | Hours | <10 s |
+| 500 MW | 600 MW | Hours | <15 s |
+| 1 GW | 1.2 GW | Hours | <15 s |
+
+---
 
 ### Grid Connection for GW-Scale Facilities
 
 | Scale | Grid Requirements | Typical Lead Time |
 |---:|---|---|
-| 50 MW | ? | ? |
-| 200 MW | ? | ? |
-| 500 MW | ? | ? |
-| 1 GW+ | ? | ? |
+| 50 MW | Substation tie-in | 1–2 years |
+| 200 MW | Dedicated substation | 2–3 years |
+| 500 MW | Transmission upgrade | 3–5 years |
+| 1 GW+ | New transmission lines | 5+ years |
+
+---
 
 ### Power sourcing strategies
 
 | Strategy | Description | Pros | Cons |
 |---|---|---|---|
-| Grid connection | ? | ? | ? |
-| On-site generation | ? | ? | ? |
-| PPA (Power Purchase Agreement) | ? | ? | ? |
-| Behind-the-meter solar/wind | ? | ? | ? |
-| Nuclear (SMR) | ? | ? | ? |
+| Grid connection | Utility power | Simple | Carbon intensity |
+| On-site generation | Gas/diesel | Fast backup | Emissions |
+| PPA | Long-term renewable contract | Green energy | Price lock |
+| Behind-the-meter solar/wind | Local generation | Low carbon | Intermittent |
+| Nuclear (SMR) | Small modular reactors | Stable low-carbon | Regulatory |
+
+Sources:
+ - https://uptimeinstitute.com/resources/what-is-pue  
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-and-cooling/  
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/  
+ - https://www.iea.org/reports/data-centres-and-data-transmission-networks  
+ - https://www.energy.gov/ne/articles/small-modular-reactors
+
 
 ---
 
@@ -420,48 +505,72 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 ### Chip-Level Power Management
 
 **Dynamic Voltage and Frequency Scaling (DVFS)**
-- How does DVFS work?
-- What is the power/frequency relationship?
+- How does DVFS work?  
+  Le processeur ajuste dynamiquement la tension et la fréquence selon la charge et la température.
+- What is the power/frequency relationship?  
+  La puissance dynamique suit approximativement : P ∝ V² × f.
 
 | Power State | Voltage | Frequency | Power | Use Case |
 |---|---:|---:|---:|---|
-| Max boost | ? | ? | ? | Peak compute |
-| Base clock | ? | ? | ? | Sustained |
-| Idle | ? | ? | ? | Low utilization |
-| Sleep | ? | ? | ? | Inactive |
+| Max boost | Élevée | Élevée | Très élevée | Peak compute |
+| Base clock | Nominale | Nominale | Élevée | Sustained |
+| Idle | Basse | Basse | Faible | Low utilization |
+| Sleep | Très basse | ~0 | Très faible | Inactive |
+
+---
 
 ### Thermal Throttling Behavior
 
 | Threshold | Temperature | Action |
 |---|---|---|
-| Target | ~83°C | ? |
-| Throttle start | ~85°C | ? |
-| Max operating | ~90°C | ? |
-| Shutdown | ~95°C | ? |
+| Target | ~83 °C | Fréquence nominale |
+| Throttle start | ~85 °C | Réduction fréquence |
+| Max operating | ~90 °C | Limitation puissance |
+| Shutdown | ~95 °C | Arrêt matériel |
+
+---
 
 ### Heat Sink and Cold Plate Design
 
 | Parameter | Impact | Tradeoff |
 |---|---|---|
-| Fin density | ? | ? |
-| Base thickness | ? | ? |
-| Heat pipe count | ? | ? |
-| Material (Cu vs Al) | ? | ? |
+| Fin density | Surface d’échange | Restriction airflow |
+| Base thickness | Diffusion chaleur | Masse |
+| Heat pipe count | Transport chaleur | Coût |
+| Material (Cu vs Al) | Conductivité | Poids / prix |
 
 | Design Aspect | Consideration | Best Practice |
 |---|---|---|
-| Contact area | ? | ? |
-| Channel design | ? | ? |
-| Flow rate | ? | ? |
-| Pressure drop | ? | ? |
+| Contact area | Résistance thermique | Couverture maximale |
+| Channel design | Turbulence | Micro-canaux |
+| Flow rate | ΔT liquide | Suffisant sans excès |
+| Pressure drop | Charge pompe | Minimiser |
+
+---
 
 ### Stranded Power in Datacenters
 
 **Questions**
-- What is stranded power?
-- Why does it occur?
-- How much power is typically stranded?
-- How do you minimize stranded capacity?
+- What is stranded power?  
+  Puissance électrique installée mais inutilisable.
+
+- Why does it occur?  
+  Limites de refroidissement ou déséquilibre rack-level.
+
+- How much power is typically stranded?  
+  10–30 % de capacité.
+
+- How do you minimize stranded capacity?  
+  Zoning densité, liquid cooling, orchestration workload.
+
+Sources:
+ - https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/  
+ - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive  
+ - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html  
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-and-cooling/  
+ - https://uptimeinstitute.com/resources
+
 
 ---
 
@@ -471,11 +580,11 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 
 | Company | Products | Cooling Approach | Market Position |
 |---|---|---|---|
-| NVIDIA | DGX, MGX, HGX | Air + DLC ready | ? |
-| Dell | PowerEdge XE | ? | ? |
-| HPE | Cray EX | ? | ? |
-| Supermicro | GPU servers | ? | ? |
-| Lenovo | ThinkSystem | ? | ? |
+| NVIDIA | DGX, MGX, HGX | Air + DLC ready | Leader AI platforms |
+| Dell | PowerEdge XE | Air + DLC | Enterprise AI servers |
+| HPE | Cray EX | DLC | HPC & AI leader |
+| Supermicro | GPU servers | Air + DLC | Broad OEM supplier |
+| Lenovo | ThinkSystem | Air + DLC | Enterprise/HPC |
 
 ### Cooling Infrastructure Vendors
 
@@ -498,6 +607,22 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 | Eaton | UPS, PDUs | Power distribution |
 | ABB | Transformers, switchgear | Utility-scale |
 | Caterpillar | Generators | Backup power |
+
+Sources:
+ - https://www.nvidia.com/en-us/data-center/  
+ - https://www.dell.com/en-us/dt/servers/poweredge-xe.htm  
+ - https://www.hpe.com/us/en/compute/hpc/cray-ex.html  
+ - https://www.supermicro.com/en/products/gpu  
+ - https://www.lenovo.com/us/en/servers-storage/servers/thinksystem/  
+ - https://www.vertiv.com/  
+ - https://www.se.com/ww/en/work/solutions/for-business/data-centers-and-networks/  
+ - https://www.asetek.com/data-center-liquid-cooling/  
+ - https://www.coolitsystems.com/  
+ - https://www.grcooling.com/  
+ - https://www.submer.com/  
+ - https://www.eaton.com/  
+ - https://new.abb.com/  
+ - https://www.caterpillar.com/
 
 ---
 
