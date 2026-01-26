@@ -2,6 +2,7 @@
 marp: true
 theme: academic
 math: mathjax
+paginate: true
 ---
 
 <!-- _class: lead -->
@@ -33,11 +34,11 @@ GPU distribué 2026
 
 ### Evolution de la puissance des GPU
 
-**Key questions**
-- How has GPU power consumption evolved?
-- What is driving the power increases?
-- Is there a ceiling to GPU power?
-- How does power scale with performance?
+**Questions clés**
+- Comment la consommation électrique des GPU a-t-elle évolué ?
+- Qu'est-ce qui provoque l’augmentation de la puissance ?
+- Existe-t-il une limite maximale à la puissance des GPU ?
+- Comment la puissance évolue-t-elle avec les performances ?
 
 ---
 
@@ -66,7 +67,7 @@ GPU distribué 2026
     padding-top: 100px;
   }
 </style>
-**System-level power (full node)**
+**Puissance au niveau système (nœud complet)**
 
 | System | GPUs | GPU Power | Total System Power | Year |
 |---|---|---:|---:|---:|
@@ -84,7 +85,7 @@ GPU distribué 2026
     padding-top: 100px;
   }
 </style>
-**Rack power density evolution**
+**Évolution de la densité de puissance des racks**
 
 | Era | Typical Rack Power | kW/rack | Cooling Method |
 |---|---:|---:|---|
@@ -106,17 +107,24 @@ GPU distribué 2026
 ---
 
 <!-- header: "Partie B: Distribution de puissance aux GPU" -->
-### How does GPU power delivery work?
+### Comment fonctionne l’alimentation électrique d’un GPU ?
 
-**Key Questions**
-- From grid to chip: what are the conversion stages?
-- Where are the efficiency losses?
-- How is power distributed within a GPU?
+**Questions clés**
+- Du réseau électrique à la puce : quelles sont les étapes de conversion ?
+- Où se situent les pertes d’efficacité ?
+- Comment la puissance est-elle distribuée à l’intérieur d’un GPU ?
 
 ![center](power-delivery.png)
 
 ---
 
+<style scoped>
+  section {
+    font-size: 2.5em;
+    padding: 0;
+    padding-top: 100px;
+  }
+</style>
 | Stage | Input | Output | Typical Efficiency | Loss |
 |---|---|---|---:|---:|
 | Utility transformer | HV AC (10–30 kV) | LV AC (400–480 V) | 98–99% | 1–2% |
@@ -127,7 +135,7 @@ GPU distribué 2026
 
 ---
 
-### Voltage Regulator Modules (VRMs)
+### Modules régulateurs de tension (VRM)
 
 **Questions**
 - Qu'est-ce que VRM et pourquoi est-ce un élément critique ?
@@ -155,7 +163,7 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 
 ---
 
-### 12V vs 48V power distribution
+### Distribution de puissance 12V vs 48V
 
 - En quoi le 48V est meilleur pour les systèmes de haute puissance?
 <!-- Parce qu'avec une tension 4 x plus élevée on diminue l'intensité par 4 pour avoir la même puissance tout en réduisant les pertes sous formes de chaleurs. -->
@@ -176,7 +184,7 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 
 ---
 
-### Connector considerations
+### Considérations sur les connecteurs
 
 | Connector | Max Power | Pins | Issues |
 |---|---:|---:|---|
@@ -186,17 +194,17 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 
 ---
 
-### 800V DC for AI factories
+### 800V DC pour les usines IA
 
 **Questions**
 - Pourquoi NVIDIA promeut-t-il 800V DC?
-<!-- Pour réduire l'intensité qui circule dans les racks de très haute puissance et réduire par conséquent les pertes par effet Joule. -->
 - Quels sont les avantages en termes d'efficacité?
-<!-- Il y aurait moins d'étage de conversion donc moins de source de perte et meilleur acheminement du courant le long des racks. -->
 - Comment cela change-t-il la conception des datacenter?
-<!--  -->
 - Quels sont les considérations de sécurité?
-<!-- DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure, de procédures et de conformité (personnel formé). -->
+<!-- Pour réduire l'intensité qui circule dans les racks de très haute puissance et réduire par conséquent les pertes par effet Joule.
+Il y aurait moins d'étage de conversion donc moins de source de perte et meilleur acheminement du courant le long des racks.
+
+DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure, de procédures et de conformité (personnel formé). -->
 
 ---
 
@@ -237,18 +245,25 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 
 ### Direct Liquid Cooling (DLC)
 
-**How does DLC work?**
-- Cold plate design and attachment
+**Comment fonctionne le DLC ?**
+- Conception et fixation des cold plates
+- Manifolds et systèmes de distribution
+- Types de fluides et débits
+- Rejet de chaleur (CDU, dry coolers, tours de refroidissement)
 <!-- Plaque métallique en contact direct avec GPU, chaleur transférée au fluide -->
-- Manifold and distribution systems
 <!-- réseaux de tuyauterie qui distribuent le fluide vers chaque cold plate -->
-- Coolant types and flow rates
 <!-- eau/glycol ou fluides diélectriques, débit optimisé pour ΔT cible -->
-- Heat rejection (CDU, dry coolers, cooling towers)
 <!-- CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou tours) -->
 
 ---
 
+<style scoped>
+  section {
+    font-size: 2.5em;
+    padding: 0;
+    padding-top: 100px;
+  }
+</style>
 | DLC Component | Function | Key Specifications |
 |---|---|---|
 | Cold plate | Transfert de chaleur du GPU vers le liquide | Surface alu/cuivre, low ΔT |
@@ -271,7 +286,7 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 ---
 <style scoped>
   section {
-    font-size: 2.5em;
+    font-size: 2.4em;
     padding: 0;
     padding-top: 100px;
   }
@@ -287,11 +302,11 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 
 ### Immersion Cooling
 
-**Topics**
-- Single-phase vs two-phase  
-- Tank design and fluid management  
-- Heat rejection methods  
-- Maintenance considerations 
+**Sujets**
+- Monophasé vs diphasé  
+- Conception des bacs et gestion des fluides  
+- Méthodes de rejet thermique  
+- Considérations de maintenance
 
 ---
 
@@ -352,9 +367,9 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 ---
 
 **Questions**
-- What does PUE measure and not measure?  
-- How does cooling choice affect PUE?  
-- What are the components of overhead?  
+- Que mesure le PUE et que ne mesure-t-il pas ?
+- Comment le choix du refroidissement affecte-t-il le PUE ?
+- Quels sont les composants du surcoût énergétique ?
 <!-- PUE mesure l’efficacité énergétique de l’infrastructure du datacenter mais ne mesure pas l’efficacité des applications, des serveurs ou de l’usage des ressources IT. -->
 <!-- Refroidissement, pertes de distribution électrique, UPS, éclairage, sécurité, auxiliaires. -->
 <!-- Les solutions liquid cooling réduisent fortement l’énergie dédiée au refroidissement, ce qui diminue le PUE. -->
@@ -391,7 +406,7 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 
 ---
 
-**Best-in-class examples**
+**Exemples de référence (best-in-class)**
 <!-- Best-in-class = Les exemples optimaux pour les autres entreprises -->
 
 | Company | Facility | PUE | How Achieved |
@@ -403,7 +418,7 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 
 ---
 
-**Beyond PUE: other efficiency metrics**
+**Au-delà du PUE : autres métriques d’efficacité**
 
 | Metric | Definition | Typical Values | Best-in-Class |
 |---|---|---|---|
@@ -422,12 +437,12 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 ---
 
 <!-- header: "Partie E: Spécifications de l'infrastructure" -->
-### Power Density Planning
+### Planification de la densité de puissance
 
 **Questions**
-- How do you plan for increasing density?  
-- What infrastructure upgrades are needed?  
-- How do you handle mixed densities?  
+- Comment planifier l’augmentation de densité ?
+- Quelles mises à niveau d’infrastructure sont nécessaires ?
+- Comment gérer des densités mixtes ?
 <!-- Modular power and cooling, oversizing pathways, liquid-ready racks.
 Higher-capacity busways, transformers, UPS, liquid cooling loops.
 Zoning: air-cooled rows + liquid-cooled rows. -->
@@ -443,7 +458,7 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-### Power distribution architecture
+### Architecture de distribution électrique
 
 | Component | Function | Sizing Consideration |
 |---|---|---|
@@ -455,7 +470,7 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-### Cooling Capacity Planning
+### Planification de capacité de refroidissement
 
 | Cooling capacity Unit | Conversion | Context |
 |---|---|---|
@@ -465,7 +480,7 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-**Water requirements for liquid cooling**
+**Besoins en eau pour le refroidissement liquide**
 
 | Cooling Method | Water Usage | m³/h per MW |
 |---|---|---:|
@@ -475,7 +490,7 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-### Backup Power Systems
+### Systèmes d’alimentation de secours
 
 | UPS Type | Efficiency | Runtime | Best For |
 |---|---:|---:|---|
@@ -486,7 +501,7 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-**Generator requirements**
+**Exigences des générateurs**
 
 | Facility Size | Generator Capacity | Fuel Storage | Startup Time |
 |---:|---|---|---|
@@ -497,7 +512,7 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-### Grid Connection for GW-Scale Facilities
+### Connexion réseau pour sites à l’échelle du GigaWatt
 
 | Scale | Grid Requirements | Typical Lead Time |
 |---:|---|---|
@@ -507,8 +522,14 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 | 1 GW+ | New transmission lines | 5+ years |
 
 ---
-
-### Power sourcing strategies
+<style scoped>
+  section {
+    font-size: 2.3em;
+    padding: 0;
+    padding-top: 100px;
+  }
+</style>
+### Stratégies d’approvisionnement énergétique
 
 | Strategy | Description | Pros | Cons |
 |---|---|---|---|
@@ -526,11 +547,11 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 ---
 
 <!-- header: "Partie F: Sujets approfondis" -->
-### Chip-Level Power Management
+### Gestion de l’énergie au niveau puce
 
-**Dynamic Voltage and Frequency Scaling (DVFS)**
-- How does DVFS work?  
-- What is the power/frequency relationship?  
+**Mise à l’échelle dynamique tension/fréquence (DVFS)**
+- Comment fonctionne le DVFS ?
+- Quelle est la relation puissance/fréquence ?
 <!-- Le processeur ajuste dynamiquement la tension et la fréquence selon la charge et la température.
 La puissance dynamique suit approximativement : P ∝ V² × f. -->
 
@@ -545,7 +566,7 @@ La puissance dynamique suit approximativement : P ∝ V² × f. -->
 
 ---
 
-### Thermal Throttling Behavior
+### Comportement du throttling thermique
 
 | Threshold | Temperature | Action |
 |---|---|---|
@@ -556,7 +577,7 @@ La puissance dynamique suit approximativement : P ∝ V² × f. -->
 
 ---
 
-### Heat Sink and Cold Plate Design
+### Conception des dissipateurs et cold plates
 
 | Parameter | Impact | Tradeoff |
 |---|---|---|
@@ -576,13 +597,13 @@ La puissance dynamique suit approximativement : P ∝ V² × f. -->
 
 ---
 
-### Stranded Power in Datacenters
+### Puissance échouée (« Stranded Power ») dans les datacenters
 
 **Questions**
-- What is stranded power?  
-- Why does it occur?  
-- How much power is typically stranded?  
-- How do you minimize stranded capacity?  
+- Qu’est-ce que la puissance échouée ?
+- Pourquoi apparaît-elle ?
+- Quelle part de puissance est typiquement échouée ?
+- Comment minimiser cette capacité perdue ? 
 <!-- Puissance électrique installée mais inutilisable.
 Limites de refroidissement ou déséquilibre rack-level.
 10–30 % de capacité.
@@ -591,12 +612,12 @@ Zoning densité, liquid cooling, orchestration workload. -->
 ---
 
 <!-- header: "AXE 6 : Puissance & Refroidissement" -->
-## Partie G: Companies & Industry Landscape
+## Partie G: Entreprises & paysage industriel
 
 ---
 
-<!-- header: "Partie G: Companies & Industry Landscape" -->
-### System Vendors
+<!-- header: "Partie G: Entreprises & paysage industriel" -->
+### Constructeurs de systèmes
 
 | Company | Products | Cooling Approach | Market Position |
 |---|---|---|---|
@@ -613,7 +634,7 @@ Zoning densité, liquid cooling, orchestration workload. -->
 
 ---
 
-### Cooling Infrastructure Vendors
+### Fournisseurs d’infrastructure de refroidissement
 
 | Company | Products | Technology Focus |
 |---|---|---|
@@ -627,7 +648,7 @@ Zoning densité, liquid cooling, orchestration workload. -->
 
 ---
 
-### Power Infrastructure Vendors
+### Fournisseurs d’infrastructure électrique
 
 | Company | Products | Specialty |
 |---|---|---|
@@ -640,7 +661,7 @@ Zoning densité, liquid cooling, orchestration workload. -->
 ---
 
 <!-- header: "AXE 6 : Puissance & Refroidissement" -->
-## Partie H: Summary Comparison
+## Partie H: Comparaison finale
 
 ---
 
@@ -651,9 +672,9 @@ Zoning densité, liquid cooling, orchestration workload. -->
     padding-top: 100px
   }
 </style>
-<!-- header: "Partie H: Summary Comparison" -->
+<!-- header: "Partie H: Comparaison finale" -->
 
-### Cooling Technology Comparison
+### Comparaison des technologies de refroidissement
 
 
 | Aspect | Air Cooling | Rear-Door HX | Direct Liquid | Single-Phase Immersion | Two-Phase Immersion |
@@ -674,7 +695,7 @@ Zoning densité, liquid cooling, orchestration workload. -->
     padding-top: 100px
   }
 </style>
-### AI System Power Summary
+### Résumé de puissance des systèmes IA
 
 | System | GPUs | Total Power | Cooling Method | Rack Density |
 |---|---|---:|---|---:|
@@ -688,12 +709,12 @@ Zoning densité, liquid cooling, orchestration workload. -->
 ---
 <style scoped>
   section {
-    font-size: 1.8em;
+    font-size: 1.7em;
     padding: 0;
     padding-top: 100px
   }
 </style>
-### Datacenter Efficiency Comparison
+### Comparaison d’efficacité des datacenters
 
 | Operator | Facility Type | PUE | WUE | Cooling Method |
 |---|---|---:|---:|---|
@@ -707,12 +728,12 @@ Zoning densité, liquid cooling, orchestration workload. -->
 ---
 <style scoped>
   section {
-    font-size: 2.3em;
+    font-size: 2.2em;
     padding: 0;
     padding-top: 100px
   }
 </style>
-### TCO Impact of Cooling Choice
+### Impact du choix de refroidissement sur le TCO
 
 | Cost Component | Air Cooling | DLC | Immersion |
 |---|---:|---:|---:|
