@@ -1,19 +1,37 @@
-# AXIS 6: Power & Cooling (Comparative Analysis)
+---
+marp: true
+theme: academic
+math: mathjax
+---
 
-**Presentation Format:** 30–45 min presentation (through Google Meet)
+<!-- _class: lead -->
 
-## Mission
-- Explain the power and thermal challenges of modern AI infrastructure
-- Compare cooling technologies and analyze datacenter design tradeoffs
-- YOU CAN USE CHATGPT but always add source to every statements you say
-- If unsure of statements (because no sources found), put in *italic in a different colors*
-- Some data in tables below were not checked. If you decide to use them, feel free but it needs sources OR a formula that explains how to get the value
+# AXE 6: Puissance & Refroidissement
+
+Charly Saugey
+Paul Haardt
+Corentin Colmel
+
+Majeure Image / Epita
+GPU distribué 2026
 
 ---
 
-## Part A: The Power Trajectory of AI Systems
+<!-- header: "AXE 6: Puissance & Refroidissement" -->
 
-### GPU Power Evolution
+## Mission
+- Expliquer les enjeux de puissance et de refroidissmenet des infrastructure IA moderne
+- Comparer les technologie de refroidissement et analyser les astuces de design des datacenters
+
+---
+
+## Partie A : Evolution de la puissance des système IA
+
+---
+
+<!-- header: "Partie A : Evolution de la puissance des système IA" -->
+
+### Evolution de la puissance des GPU
 
 **Key questions**
 - How has GPU power consumption evolved?
@@ -21,6 +39,15 @@
 - Is there a ceiling to GPU power?
 - How does power scale with performance?
 
+---
+
+<style scoped>
+  section {
+    font-size: 2.6em;
+    padding: 0;
+    padding-top: 100px;
+  }
+</style>
 | GPU | Year | TDP (W) | FP16 TFLOPs | W/TFLOP | Process Node |
 |---|---:|---:|---:|---:|---|
 | V100 | 2017 | 300 | 125 | 2.40 | TSMC 12nm FFN |
@@ -31,6 +58,14 @@
 | B300 | 2025 | 1100 | 5000 | 0.22 | TSMC 4NP |
 | R100 (Rubin) | 2026 | _~2300_ | _~4000_ | _~0.58_ | _TSMC N3_ |
 
+---
+<style scoped>
+  section {
+    font-size: 2.7em;
+    padding: 0;
+    padding-top: 100px;
+  }
+</style>
 **System-level power (full node)**
 
 | System | GPUs | GPU Power | Total System Power | Year |
@@ -41,7 +76,14 @@
 | DGX B200 | 8× B200 SXM | 8.0 kW | ~14.3 kW | 2024 |
 | GB200 NVL72 | 72× B200 | 72.0 kW | ~120 kW | 2024 |
 
-
+---
+<style scoped>
+  section {
+    font-size: 2.7em;
+    padding: 0;
+    padding-top: 100px;
+  }
+</style>
 **Rack power density evolution**
 
 | Era | Typical Rack Power | kW/rack | Cooling Method |
@@ -54,17 +96,26 @@
 
 ---
 
-## Part B: GPU Power Delivery
+![w:1050 center](./gpu-consumtion-evolution.webp)
 
+---
+
+<!-- header: "AXE 6: Puissance & Refroidissement" -->
+## Partie B: Distribution de puissance aux GPU
+
+---
+
+<!-- header: "Partie B: Distribution de puissance aux GPU" -->
 ### How does GPU power delivery work?
 
-**Questions**
+**Key Questions**
 - From grid to chip: what are the conversion stages?
 - Where are the efficiency losses?
 - How is power distributed within a GPU?
 
-**Power delivery hierarchy**
-- Grid (AC) → Transformer → UPS → PDU → PSU → VRM → GPU Die
+![center](power-delivery.png)
+
+---
 
 | Stage | Input | Output | Typical Efficiency | Loss |
 |---|---|---|---:|---:|
@@ -74,22 +125,25 @@
 | PSU (AC-DC) | AC (200–240 V) | DC (12 V / 48 V) | 92–96% | 4–8% |
 | VRM (DC-DC) | DC (12 V / 48 V) | DC (~0.7–1.1 V) | 85–95% | 5–15% |
 
+---
+
 ### Voltage Regulator Modules (VRMs)
 
 **Questions**
-- What is a VRM and why is it critical?
-Le VRM est chargé de convertir le 12/48 V en tension <1V pour les cors.
-Il est critique dans le sens où il exige une tension d'entrée stable et sans bruit.
-- What are the phases and how do they work?
-Une phase = controleur + MOSFETs + inductance
-Les phases fonctionnent en parallèle pour partager le courant et réduire l'ondulation.
-- Why is VRM efficiency important?
-Si le GPU consomme 1 kW d'éléctricité et possède un rendement de 90%, il dissipe donc 10% soit 100 W en chaleur qu'il faut évacuer.
-- What are the thermal challenges?
-Plusieurs défit :
- - Réduire la perte de puissance d'entrée en chaleur
+- Qu'est-ce que VRM et pourquoi est-ce un élément critique ?
+<!-- Le VRM est chargé de convertir le 12/48 V en tension < 1V pour les cors. Il est critique dans le sens où il exige une tension d'entrée stable et sans bruit. -->
+- Qu'est-ce que les phases et comment fonctionnent-elles ?
+<!-- Une phase = controleur + MOSFETs + inductance
+Les phases fonctionnent en parallèle pour partager le courant et réduire l'ondulation. -->
+- Pourquoi le rendement d'un VRm est important ?
+<!-- Si le GPU consomme 1 kW d'éléctricité et possède un rendement de 90%, il dissipe donc 10% soit 100 W en chaleur qu'il faut évacuer. -->
+- Quels sont les défis thermiques ?
+<!-- Plusieurs défit :
+ - Réduire la perte de puissance d'entrée sous forme de chaleur
  - Limiter l'impact de la chaleur sur les performance
- - Evacuer la chaleur le plus efficacement possible
+ - Evacuer la chaleur le plus efficacement possible -->
+
+---
 
 | VRM Aspect | Description | Typical Value |
 |---|---|---|
@@ -99,25 +153,28 @@ Plusieurs défit :
 | Efficiency | DC-DC conversion efficiency | 85–95% |
 | Power loss (1kW GPU) | Heat dissipated by VRM | 50–150 W |
 
+---
 
 ### 12V vs 48V power distribution
 
-**Questions**
-- Why is 48V better for high-power systems?
-Parce qu'avec une tension 4 x plus élevée on diminue l'intensité par 4 pour avoir la même puissance tout en réduisant les pertes sous formes de chaleurs.
-- What is the current reduction benefit?
-- Who is pushing 48V adoption?
-Un peu tout le monde qui gravite autour des GPU
-- What are the challenges?
-Les VRM sont plus complexes, le risques de pont éléctrique entre deux composant unltra-proche est plus élevé, il faut assurer la compatibilité sur les appareils supports...
+- En quoi le 48V est meilleur pour les systèmes de haute puissance?
+<!-- Parce qu'avec une tension 4 x plus élevée on diminue l'intensité par 4 pour avoir la même puissance tout en réduisant les pertes sous formes de chaleurs. -->
+- Qui promeut le 48V?
+<!-- Un peu tout le monde qui gravite autour des GPU -->
+- Quels sont les défis?
+<!-- Les VRM sont plus complexes, le risques de pont éléctrique entre deux composant unltra-proche est plus élevé, il faut assurer la compatibilité sur les appareils supports... -->
+
+---
 
 | Aspect | 12V Distribution | 48V Distribution |
 |---|---|---|
-| Current for 1kW | ~83 A | ~21 A |
-| Cable thickness | Thick (high current) | Thinner |
-| I²R losses | High (×16 vs 48V) | Much lower |
-| Connector size | Large / multiple pins | Smaller / fewer pins |
-| Industry adoption | Legacy servers | AI & hyperscale |
+| Intensité pour 1kW | ~83 A | ~21 A |
+| Epaisseur du câble | Thick (high current) | Thinner |
+| Pertes par effet Joule | High (×16 vs 48V) | Much lower |
+| Taille du connecteur | Large / multiple pins | Smaller / fewer pins |
+| Adoption industrielle | Legacy servers | AI & hyperscale |
+
+---
 
 ### Connector considerations
 
@@ -127,38 +184,47 @@ Les VRM sont plus complexes, le risques de pont éléctrique entre deux composan
 | 12VHPWR | 600 W | 16 (12+4 sense) | Overheating, insertion sensitivity |
 | 12V-2x6 | 600 W | 16 (12+4 sense) | Improved safety, still high current |
 
+---
+
 ### 800V DC for AI factories
 
 **Questions**
-- Why is NVIDIA pushing 800V DC?
-Pour réduire l'intensité qui circule dans les racks de très haute puissance et réduire par conséquent les pertes par effet Joule.
-- What efficiency gains are possible?
-Il y aurait moins d'étage de conversion donc moins de source de perte et meilleur acheminement du courant le long des racks.
-- How does this change datacenter design?
-- What are the safety considerations?
-DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure, de procédures et de conformité (personnel formé).
+- Pourquoi NVIDIA promeut-t-il 800V DC?
+<!-- Pour réduire l'intensité qui circule dans les racks de très haute puissance et réduire par conséquent les pertes par effet Joule. -->
+- Quels sont les avantages en termes d'efficacité?
+<!-- Il y aurait moins d'étage de conversion donc moins de source de perte et meilleur acheminement du courant le long des racks. -->
+- Comment cela change-t-il la conception des datacenter?
+<!--  -->
+- Quels sont les considérations de sécurité?
+<!-- DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure, de procédures et de conformité (personnel formé). -->
 
 ---
 
-## Part C: Cooling Technologies
+<!-- header: "AXE 6: Puissance & Refroidissement" -->
+## Partie C: Technologies de refroidissement
 
-### Air Cooling
+---
+
+<!-- header: "Partie C: Technologies de refroidissement" -->
+### Refroidissement par air
 
 **Questions**
-- How does air cooling work?
-Par convection, l'élément chaud rechauffe l'air autour de lui, avec un ventilateur ou autre, l'air chaud est chassé, réablissant le déséquilibre de température. Le second principe de thermodynamique prend le relai en refroidissant l'élément chaud et en rechauffant l'air et ainsi de suite.
-- Heat sink design principles
-Le but est d'optimisé la surface d'échange thermique entre l'élément chaud et l'air
-- What are the limits?
-Le refroissiement par convection a rendement plus faible que par conduction.
-- When does air cooling fail?
-Si l'air ambiant est chaud, celui-ci peut ne plus absorber assez de chaleur pour refroidir efficacement l'élément chaud
-- At what TDP does air become impractical?
-~750 W
-- What are the acoustic limits?
-~75dB
-- How does altitude affect air cooling?
-+altitude = air moins dense = refroidissmeent moins efficace pour un même volume d'air = débit plus élévé nécessaire
+- Comment fonctionne le refroidissement par air?
+- Quels sont les principes de conception d'un heat sink?
+- Quels sont les limites?
+- Quand le refroidissement par air échoue-t-il?
+- A quel TDP l'air devient inutil?
+- Quels sont les limites acoustiques?
+- Comment l'altitude affecte-t-elle le refroidissement par air?
+<!-- Par convection, l'élément chaud rechauffe l'air autour de lui, avec un ventilateur ou autre, l'air chaud est chassé, réablissant le déséquilibre de température. Le second principe de thermodynamique prend le relai en refroidissant l'élément chaud et en rechauffant l'air et ainsi de suite. -->
+<!-- Le but est d'optimisé la surface d'échange thermique entre l'élément chaud et l'air -->
+<!-- Le refroissiement par convection a rendement plus faible que par conduction. -->
+<!-- Si l'air ambiant est chaud, celui-ci peut ne plus absorber assez de chaleur pour refroidir efficacement l'élément chaud -->
+<!-- ~750 W -->
+<!-- ~75dB -->
+<!-- altitude = air moins dense = refroidissmeent moins efficace pour un même volume d'air = débit plus élévé nécessaire -->
+
+---
 
 | Air Cooling Aspect | Typical Value | Limit |
 |---|---:|---:|
@@ -167,17 +233,21 @@ Si l'air ambiant est chaud, celui-ci peut ne plus absorber assez de chaleur pour
 | Airflow per rack | 85–170 $m^3m^{-1}$ | ~225 $m^3m^{-1}$  |
 | Fan power overhead | 5–10% | ~15% |
 
+---
+
 ### Direct Liquid Cooling (DLC)
 
 **How does DLC work?**
 - Cold plate design and attachment
-plaque métallique en contact direct avec GPU, chaleur transférée au fluide
+<!-- Plaque métallique en contact direct avec GPU, chaleur transférée au fluide -->
 - Manifold and distribution systems
-réseaux de tuyauterie qui distribuent le fluide vers chaque cold plate.
+<!-- réseaux de tuyauterie qui distribuent le fluide vers chaque cold plate -->
 - Coolant types and flow rates
-eau/glycol ou fluides diélectriques, débit optimisé pour ΔT cible.
+<!-- eau/glycol ou fluides diélectriques, débit optimisé pour ΔT cible -->
 - Heat rejection (CDU, dry coolers, cooling towers)
-CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou tours).
+<!-- CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou tours) -->
+
+---
 
 | DLC Component | Function | Key Specifications |
 |---|---|---|
@@ -187,6 +257,7 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | CDU (Coolant Distribution Unit) | Pompe + échangeur + filtration | Débit 10–100 L/min, filtres |
 | Facility water loop | Rejet de chaleur vers le bâtiment | Dry coolers ou cooling towers |
 
+---
 
 | Aspect | Air Cooling | Direct Liquid Cooling |
 |---|---|---|
@@ -197,7 +268,14 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Capital cost | Lower | Higher (install + CDU) |
 | Operating cost | Higher fan energy | Lower pumping energy |
 
-### Coolant types
+---
+<style scoped>
+  section {
+    font-size: 2.5em;
+    padding: 0;
+    padding-top: 100px;
+  }
+</style>
 
 | Coolant | Thermal Properties | Cost | Safety | Use Case |
 |---|---|---|---|---|
@@ -205,13 +283,17 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Propylene glycol | Slightly lower than water, freeze protection | Low–Medium | Less toxic than ethylene glycol | Cold climates, DLC |
 | Dielectric fluids | Lower than water, electrically insulating | High | Non-conductive, safer for electronics | Immersion cooling |
 
+---
+
 ### Immersion Cooling
 
 **Topics**
 - Single-phase vs two-phase  
 - Tank design and fluid management  
 - Heat rejection methods  
-- Maintenance considerations  
+- Maintenance considerations 
+
+---
 
 | Aspect | Single-Phase Immersion | Two-Phase Immersion |
 |---|---|---|
@@ -222,6 +304,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Complexity | Medium | High |
 | Maturity | Commercially mature | Emerging / niche |
 
+---
+
 | Advantage | Challenge |
 |---|---|
 | Highest heat density | Specialized fluids |
@@ -229,20 +313,21 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Reduced PUE | Higher CAPEX |
 | Component longevity | Maintenance procedures |
 
+---
+
 ### Rear-Door Heat Exchangers (RDHx)
 
 **Questions**
-- What is RDHx?  
-  Un échangeur thermique air-liquide monté à l’arrière d’un rack qui capte l’air chaud sortant et en extrait la chaleur via un circuit d’eau.
+- Qu'est-ce que RDHx ?  
+- Comment est-ce que cela aide le refroidissement à air ?  
+- Quelles puissances peut-il supporter ?  
+- Quand est-ce le bon choix ?  
+<!-- Un échangeur thermique air-liquide monté à l’arrière d’un rack qui capte l’air chaud sortant et en extrait la chaleur via un circuit d’eau. -->
+<!-- Il refroidit l’air directement au niveau du rack, réduisant la charge thermique de la salle et améliorant l’efficacité du refroidissement à air existant. -->
+<!-- Environ 20 000 à 80 000 W par rack selon le type (passif ou actif). -->
+<!-- Lorsqu’un datacenter refroidi à l’air doit supporter des racks plus denses sans passer immédiatement au liquid cooling direct ou à l’immersion. -->
 
-- How does it supplement air cooling?  
-  Il refroidit l’air directement au niveau du rack, réduisant la charge thermique de la salle et améliorant l’efficacité du refroidissement à air existant.
-
-- What densities can it support?  
-  Environ 20 000 à 80 000 W par rack selon le type (passif ou actif).
-
-- When is it the right choice?  
-  Lorsqu’un datacenter refroidi à l’air doit supporter des racks plus denses sans passer immédiatement au liquid cooling direct ou à l’immersion.
+---
 
 | RDHx Type | Cooling Capacity | Best For |
 |---|---:|---|
@@ -251,29 +336,38 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 
 ---
 
-## Part D: Power Usage Effectiveness (PUE)
+<!-- header: "AXE 6 : Puissance & Refroidissement" -->
+## Partie D: Rendement énergétique (PUE)
 
-### Understanding PUE
+---
 
-**Definition**
+<!-- header: "Partie D: Rendement énergétique (PUE)" -->
+### Comprendre le PUE
+
+**Définition**
+- PUE = Power Usage Effectiveness
 - PUE = Total Facility Power / IT Equipment Power  
 - 1 PUE = (IT Load + Cooling + Power Distribution + Lighting + Other) / IT Load
 
+---
+
 **Questions**
 - What does PUE measure and not measure?  
-  PUE mesure l’efficacité énergétique de l’infrastructure du datacenter mais ne mesure pas l’efficacité des applications, des serveurs ou de l’usage des ressources IT.
-
-- What are the components of overhead?  
-  Refroidissement, pertes de distribution électrique, UPS, éclairage, sécurité, auxiliaires.
-
 - How does cooling choice affect PUE?  
-  Les solutions liquid cooling réduisent fortement l’énergie dédiée au refroidissement, ce qui diminue le PUE.
+- What are the components of overhead?  
+<!-- PUE mesure l’efficacité énergétique de l’infrastructure du datacenter mais ne mesure pas l’efficacité des applications, des serveurs ou de l’usage des ressources IT. -->
+<!-- Refroidissement, pertes de distribution électrique, UPS, éclairage, sécurité, auxiliaires. -->
+<!-- Les solutions liquid cooling réduisent fortement l’énergie dédiée au refroidissement, ce qui diminue le PUE. -->
+
+---
 
 | PUE Component | Typical % of Overhead | Reduction Strategies |
 |---|---:|---|
 | Cooling | 40–60 % | DLC, free cooling, confinement |
 | Power distribution losses | 10–15 % | Haut rendement UPS/PSU |
 | Lighting and other | 5 % | LED, automatisation |
+
+---
 
 **PUE benchmarks**
 
@@ -285,6 +379,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Hyperscale (DLC) | 1.1–1.2 | 1.05 |
 | AI-optimized | 1.1–1.3 | 1.05 |
 
+---
+
 | Cooling Method | Typical PUE | Why |
 |---|---:|---|
 | Traditional air (CRAC) | ~1.6 | Compresseurs énergivores |
@@ -293,7 +389,10 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Direct liquid cooling | ~1.1 | Transfert thermique direct |
 | Immersion cooling | ~1.05 | Quasi suppression HVAC |
 
+---
+
 **Best-in-class examples**
+<!-- Best-in-class = Les exemples optimaux pour les autres entreprises -->
 
 | Company | Facility | PUE | How Achieved |
 |---|---|---:|---|
@@ -301,6 +400,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Meta | Hyperscale DC | 1.09 | Free cooling |
 | Microsoft | Azure DC | 1.12 | Free air + DLC |
 | NVIDIA DGX Cloud | AI DC | ~1.1 | Liquid cooling |
+
+---
 
 **Beyond PUE: other efficiency metrics**
 
@@ -310,19 +411,28 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | WUE | L d’eau / kWh IT | 0.2–1.8 | <0.2 |
 | CUE | kgCO₂ / kWh IT | Variable | Near zero |
 
+<!-- WUE = Water Usage Efficiency -->
+<!-- CUE = Carbon Usage Efficiency -->
+
 ---
 
-## Part E: Infrastructure Requirements
+<!-- header: "AXE 6 : Puissances & Refroidissement" -->
+## Partie E: Spécifications de l'infrastructure
 
+---
+
+<!-- header: "Partie E: Spécifications de l'infrastructure" -->
 ### Power Density Planning
 
 **Questions**
 - How do you plan for increasing density?  
-  Modular power and cooling, oversizing pathways, liquid-ready racks.
 - What infrastructure upgrades are needed?  
-  Higher-capacity busways, transformers, UPS, liquid cooling loops.
 - How do you handle mixed densities?  
-  Zoning: air-cooled rows + liquid-cooled rows.
+<!-- Modular power and cooling, oversizing pathways, liquid-ready racks.
+Higher-capacity busways, transformers, UPS, liquid cooling loops.
+Zoning: air-cooled rows + liquid-cooled rows. -->
+
+---
 
 | Density Tier | kW/Rack | Infrastructure Requirements |
 |---|---:|---|
@@ -353,6 +463,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | 1 kW IT load (air) | 0.0003 ton | Includes overhead |
 | 1 kW IT load (DLC) | 0.00028 ton | Direct rejection |
 
+---
+
 **Water requirements for liquid cooling**
 
 | Cooling Method | Water Usage | m³/h per MW |
@@ -371,6 +483,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Line interactive | 96–98% | 5–10 min | Edge DC |
 | Rotary UPS | 96–98% | Seconds | Large DC |
 | Battery + flywheel | 95–98% | Seconds–minutes | High power |
+
+---
 
 **Generator requirements**
 
@@ -406,15 +520,21 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 
 ---
 
-## Part F: Deep Dive Topics
+<!-- header: "AXE 6 : Puissance & Refroidissement" -->
+## Partie F: Sujets approfondis
 
+---
+
+<!-- header: "Partie F: Sujets approfondis" -->
 ### Chip-Level Power Management
 
 **Dynamic Voltage and Frequency Scaling (DVFS)**
 - How does DVFS work?  
-  Le processeur ajuste dynamiquement la tension et la fréquence selon la charge et la température.
 - What is the power/frequency relationship?  
-  La puissance dynamique suit approximativement : P ∝ V² × f.
+<!-- Le processeur ajuste dynamiquement la tension et la fréquence selon la charge et la température.
+La puissance dynamique suit approximativement : P ∝ V² × f. -->
+
+---
 
 | Power State | Voltage | Frequency | Power | Use Case |
 |---|---:|---:|---:|---|
@@ -445,6 +565,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Heat pipe count | Transport chaleur | Coût |
 | Material (Cu vs Al) | Conductivité | Poids / prix |
 
+---
+
 | Design Aspect | Consideration | Best Practice |
 |---|---|---|
 | Contact area | Résistance thermique | Couverture maximale |
@@ -458,21 +580,22 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 
 **Questions**
 - What is stranded power?  
-  Puissance électrique installée mais inutilisable.
-
 - Why does it occur?  
-  Limites de refroidissement ou déséquilibre rack-level.
-
 - How much power is typically stranded?  
-  10–30 % de capacité.
-
 - How do you minimize stranded capacity?  
-  Zoning densité, liquid cooling, orchestration workload.
+<!-- Puissance électrique installée mais inutilisable.
+Limites de refroidissement ou déséquilibre rack-level.
+10–30 % de capacité.
+Zoning densité, liquid cooling, orchestration workload. -->
 
 ---
 
-## Part G: Companies & Industry Landscape
+<!-- header: "AXE 6 : Puissance & Refroidissement" -->
+## Partie G: Companies & Industry Landscape
 
+---
+
+<!-- header: "Partie G: Companies & Industry Landscape" -->
 ### System Vendors
 
 | Company | Products | Cooling Approach | Market Position |
@@ -480,8 +603,15 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | NVIDIA | DGX, MGX, HGX | Air + DLC ready | Leader AI platforms |
 | Dell | PowerEdge XE | Air + DLC | Enterprise AI servers |
 | HPE | Cray EX | DLC | HPC & AI leader |
+
+---
+
+| Company | Products | Cooling Approach | Market Position |
+|---|---|---|---|
 | Supermicro | GPU servers | Air + DLC | Broad OEM supplier |
 | Lenovo | ThinkSystem | Air + DLC | Enterprise/HPC |
+
+---
 
 ### Cooling Infrastructure Vendors
 
@@ -495,6 +625,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | LiquidCool | Immersion tanks | Two-phase immersion |
 | Submer | SmartPod | Immersion systems |
 
+---
+
 ### Power Infrastructure Vendors
 
 | Company | Products | Specialty |
@@ -507,9 +639,22 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 
 ---
 
-## Part H: Summary Comparison
+<!-- header: "AXE 6 : Puissance & Refroidissement" -->
+## Partie H: Summary Comparison
+
+---
+
+<style scoped>
+  section {
+    font-size: 1.5em;
+    padding: 0;
+    padding-top: 100px
+  }
+</style>
+<!-- header: "Partie H: Summary Comparison" -->
 
 ### Cooling Technology Comparison
+
 
 | Aspect | Air Cooling | Rear-Door HX | Direct Liquid | Single-Phase Immersion | Two-Phase Immersion |
 |---|---|---|---|---|---|
@@ -521,6 +666,14 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Maturity | Très mature | Mature | Mature | Mature (commercial) | Plus niche |
 | GPU compatibility | Universelle | Universelle | Cold-plate requis | Matériel compatible immersion | Matériel compatible immersion |
 
+---
+<style scoped>
+  section {
+    font-size: 2.1em;
+    padding: 0;
+    padding-top: 100px
+  }
+</style>
 ### AI System Power Summary
 
 | System | GPUs | Total Power | Cooling Method | Rack Density |
@@ -532,6 +685,14 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | AMD MI300X (8-way) | 8× MI300X | ~12.5 kW | Air | Variable |
 | Google TPU v5p pod | 8 960 TPU v5p chips | Non communiqué | DLC | Non communiqué |
 
+---
+<style scoped>
+  section {
+    font-size: 1.8em;
+    padding: 0;
+    padding-top: 100px
+  }
+</style>
 ### Datacenter Efficiency Comparison
 
 | Operator | Facility Type | PUE | WUE | Cooling Method |
@@ -543,6 +704,14 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | CoreWeave | AI-focused | 1.15 (site Barcelone annoncé) | “Zéro eau” annoncé (site Barcelone) | Air (free cooling) + design optimisé |
 | Lambda Labs | AI-focused | Non communiqué | Non communiqué | Non communiqué |
 
+---
+<style scoped>
+  section {
+    font-size: 2.3em;
+    padding: 0;
+    padding-top: 100px
+  }
+</style>
 ### TCO Impact of Cooling Choice
 
 | Cost Component | Air Cooling | DLC | Immersion |
@@ -555,8 +724,12 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 
 ---
 
+<!-- header: "AXE 6 : Puissance & Refroidissement" -->
 ## Sources
 
+---
+
+<!-- header: "Sources" -->
 ### Part A
  - https://www.nvidia.com
  - https://www.tsmc.com/english/dedicatedFoundry/technology
@@ -565,6 +738,7 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://www.nvidia.com/en-us/data-center/
  - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
  - https://www.anandtech.com/
+---
  - https://www.se.com/ww/en/work/solutions/for-business/data-centers-and-networks/
  - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/
  - https://uptimeinstitute.com/resources/research-and-reports
@@ -572,6 +746,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
  - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
  - https://engineering.fb.com/
+
+---
 
 ### Part B
 
@@ -582,18 +758,22 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://www.opencompute.org/documents/ocp-48v-dc-power-distribution
  - https://www.nvidia.com/en-us/data-center/energy-efficiency/
  - https://www.ti.com/power-management/48v.html
+---
  - https://www.analog.com/en/analog-dialogue/articles/why-48v.html
  - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
  - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
  - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-chain/
  - https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/data-center-ups-efficiency.html
  - https://www.plugloadsolutions.com/80pluspowersupplies.aspx
+---
  - https://www.ti.com/power-management/vrm.html
  - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html
  - https://www.ti.com/power-management/vrm.html
  - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html
  - https://www.analog.com/en/analog-dialogue/articles/multiphase-buck-converters.html
  - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
+
+---
 
 ### Part C
 
@@ -602,20 +782,25 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
  - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
  - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+---
  - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
  - https://www.nvidia.com/en-us/data-center/energy-efficiency/
  - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
  - https://www.coolingbestpractices.com/knowledge_center/whitepapers/direct_liquid_cooling
  - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
  - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+---
  - https://www.submer.com/immersion-cooling/  
  - https://www.grcooling.com/immersion-cooling/  
  - https://www.3m.com/3M/en_US/data-center-us/solutions/liquid-cooling/  
  - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
  - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/rear-door-heat-exchangers/  
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/rear-door-heat-exchanger/  
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/rear-door-heat-exchanger/ 
+---
  - https://www.asetek.com/liquid-cooling/technologies/rear-door-heat-exchanger/  
  - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+
+---
 
 ### Part D
 
@@ -626,6 +811,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
  - https://www.iea.org/reports/data-centres-and-data-transmission-networks
 
+---
+
 ### Part E
 
  - https://uptimeinstitute.com/resources/what-is-pue  
@@ -635,14 +822,19 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://www.iea.org/reports/data-centres-and-data-transmission-networks  
  - https://www.energy.gov/ne/articles/small-modular-reactors
 
+---
+
 ### Part F
 
  - https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/  
  - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive  
  - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html  
  - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+---
  - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-and-cooling/  
  - https://uptimeinstitute.com/resources
+
+---
 
 ### Part G
 
@@ -653,6 +845,7 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://www.lenovo.com/us/en/servers-storage/servers/thinksystem/  
  - https://www.vertiv.com/  
  - https://www.se.com/ww/en/work/solutions/for-business/data-centers-and-networks/  
+---
  - https://www.asetek.com/data-center-liquid-cooling/  
  - https://www.coolitsystems.com/  
  - https://www.grcooling.com/  
@@ -660,6 +853,8 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://www.eaton.com/  
  - https://new.abb.com/  
  - https://www.caterpillar.com/
+
+---
 
 ### Part H
 
@@ -669,6 +864,7 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://www.nvidia.com/en-us/data-center/gb200-nvl72/
  - https://www.sunbirddcim.com/blog/your-data-center-ready-nvidia-gb200-nvl72
  - https://www.dell.com/support/manuals/en-us/poweredge-xe9680/xe9680_ism_pub/safety-instructions?guid=guid-b85aa68d-c5c9-4ea1-8358-7388139bcfda&lang=en-us
+---
  - https://docs.cloud.google.com/tpu/docs/v5p
  - https://cloud.google.com/blog/products/ai-machine-learning/introducing-cloud-tpu-v5p-and-ai-hypercomputer
  - https://datacenters.google/efficiency
@@ -676,6 +872,7 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
  - https://aws.amazon.com/sustainability/data-centers/
  - https://www.microsoft.com/en-us/microsoft-cloud/blog/2024/12/09/sustainable-by-design-next-generation-datacenters-consume-zero-water-for-cooling/
  - https://www.edged.es/news/coreweave-partners-with-edged
+---
  - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/rear-door-heat-exchangers/
  - https://submer.com/blog/single-phase-vs-two-phase-immersion-cooling/
  - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
