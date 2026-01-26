@@ -31,12 +31,6 @@
 | B300 | 2025 | 1100 | 5000 | 0.22 | TSMC 4NP |
 | R100 (Rubin) | 2026 | _~2300_ | _~4000_ | _~0.58_ | _TSMC N3_ |
 
-Sources:
- - https://www.nvidia.com
- - https://www.tsmc.com/english/dedicatedFoundry/technology
- - https://www.anandtech.com/  
- - https://www.servethehome.com/
-
 **System-level power (full node)**
 
 | System | GPUs | GPU Power | Total System Power | Year |
@@ -47,10 +41,6 @@ Sources:
 | DGX B200 | 8× B200 SXM | 8.0 kW | ~14.3 kW | 2024 |
 | GB200 NVL72 | 72× B200 | 72.0 kW | ~120 kW | 2024 |
 
-Sources:
-- https://www.nvidia.com/en-us/data-center/
-- https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
-- https://www.anandtech.com/
 
 **Rack power density evolution**
 
@@ -61,15 +51,6 @@ Sources:
 | AI training (2022) | 30–50 kW/rack | ~40 | Air / DLC |
 | AI training (2024) | 60–120 kW/rack | ~80 | DLC required |
 | AI training (2026) | 150–300 kW/rack | ~200 | DLC / Immersion |
-
-Sources:
-- https://www.se.com/ww/en/work/solutions/for-business/data-centers-and-networks/
-- https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/
-- https://uptimeinstitute.com/resources/research-and-reports
-- https://www.nvidia.com/en-us/data-center/
-- https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
-- https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
-- https://engineering.fb.com/
 
 ---
 
@@ -92,15 +73,6 @@ Sources:
 | PDU | AC | AC | 98–99% | 1–2% |
 | PSU (AC-DC) | AC (200–240 V) | DC (12 V / 48 V) | 92–96% | 4–8% |
 | VRM (DC-DC) | DC (12 V / 48 V) | DC (~0.7–1.1 V) | 85–95% | 5–15% |
-
-Sources:
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-chain/
- - https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/data-center-ups-efficiency.html
- - https://www.plugloadsolutions.com/80pluspowersupplies.aspx
- - https://www.ti.com/power-management/vrm.html
- - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html
-
 
 ### Voltage Regulator Modules (VRMs)
 
@@ -127,11 +99,6 @@ Plusieurs défit :
 | Efficiency | DC-DC conversion efficiency | 85–95% |
 | Power loss (1kW GPU) | Heat dissipated by VRM | 50–150 W |
 
-Sources:
- - https://www.ti.com/power-management/vrm.html
- - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html
- - https://www.analog.com/en/analog-dialogue/articles/multiphase-buck-converters.html
- - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
 
 ### 12V vs 48V power distribution
 
@@ -152,13 +119,6 @@ Les VRM sont plus complexes, le risques de pont éléctrique entre deux composan
 | Connector size | Large / multiple pins | Smaller / fewer pins |
 | Industry adoption | Legacy servers | AI & hyperscale |
 
-Sources:
- - https://www.opencompute.org/documents/ocp-48v-dc-power-distribution
- - https://www.nvidia.com/en-us/data-center/energy-efficiency/
- - https://www.ti.com/power-management/48v.html
- - https://www.analog.com/en/analog-dialogue/articles/why-48v.html
- - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
-
 ### Connector considerations
 
 | Connector | Max Power | Pins | Issues |
@@ -166,12 +126,6 @@ Sources:
 | 8-pin PCIe | 150 W | 8 | Limited power, multiple cables needed |
 | 12VHPWR | 600 W | 16 (12+4 sense) | Overheating, insertion sensitivity |
 | 12V-2x6 | 600 W | 16 (12+4 sense) | Improved safety, still high current |
-
-Sources:
- - https://www.pcisig.com/specifications/pciexpress
- - https://www.nvidia.com/en-us/geforce/news/12vhpwr-connector/
- - https://www.pcisig.com/news/pcisig-introduces-12v-2x6-connector
- - https://www.anandtech.com/show/17530/nvidia-12vhpwr-issues-and-analysis
 
 ### 800V DC for AI factories
 
@@ -213,12 +167,6 @@ Si l'air ambiant est chaud, celui-ci peut ne plus absorber assez de chaleur pour
 | Airflow per rack | 85–170 $m^3m^{-1}$ | ~225 $m^3m^{-1}$  |
 | Fan power overhead | 5–10% | ~15% |
 
-Sources:
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/high-density-data-center-cooling/
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
- - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
-
 ### Direct Liquid Cooling (DLC)
 
 **How does DLC work?**
@@ -248,15 +196,6 @@ CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou t
 | Maintenance complexity | Low | Medium/High |
 | Capital cost | Lower | Higher (install + CDU) |
 | Operating cost | Higher fan energy | Lower pumping energy |
-
-Sources:
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
- - https://www.nvidia.com/en-us/data-center/energy-efficiency/
- - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
- - https://www.coolingbestpractices.com/knowledge_center/whitepapers/direct_liquid_cooling
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
-
 
 ### Coolant types
 
@@ -290,14 +229,6 @@ Sources:
 | Reduced PUE | Higher CAPEX |
 | Component longevity | Maintenance procedures |
 
-Sources:
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
- - https://www.submer.com/immersion-cooling/  
- - https://www.grcooling.com/immersion-cooling/  
- - https://www.3m.com/3M/en_US/data-center-us/solutions/liquid-cooling/  
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
-
-
 ### Rear-Door Heat Exchangers (RDHx)
 
 **Questions**
@@ -317,13 +248,6 @@ Sources:
 |---|---:|---|
 | Passive RDHx | ~20 000–35 000 W par rack | Racks densité moyenne, retrofit |
 | Active RDHx | ~30 000–80 000 W par rack | Racks haute densité (GPU) |
-
-Sources:
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/rear-door-heat-exchangers/  
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/rear-door-heat-exchanger/  
- - https://www.asetek.com/liquid-cooling/technologies/rear-door-heat-exchanger/  
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
-
 
 ---
 
@@ -385,15 +309,6 @@ Sources:
 | PUE | Ratio total/IT | 1.1–1.6 | ~1.05 |
 | WUE | L d’eau / kWh IT | 0.2–1.8 | <0.2 |
 | CUE | kgCO₂ / kWh IT | Variable | Near zero |
-
-Sources:
- - https://uptimeinstitute.com/resources/what-is-pue  
- - https://www.google.com/about/datacenters/efficiency/  
- - https://engineering.fb.com/2020/03/12/data-center-engineering/data-center-efficiency/  
- - https://learn.microsoft.com/en-us/azure/sustainability/  
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
- - https://www.iea.org/reports/data-centres-and-data-transmission-networks
-
 
 ---
 
@@ -489,15 +404,6 @@ Sources:
 | Behind-the-meter solar/wind | Local generation | Low carbon | Intermittent |
 | Nuclear (SMR) | Small modular reactors | Stable low-carbon | Regulatory |
 
-Sources:
- - https://uptimeinstitute.com/resources/what-is-pue  
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-and-cooling/  
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/  
- - https://www.iea.org/reports/data-centres-and-data-transmission-networks  
- - https://www.energy.gov/ne/articles/small-modular-reactors
-
-
 ---
 
 ## Part F: Deep Dive Topics
@@ -563,15 +469,6 @@ Sources:
 - How do you minimize stranded capacity?  
   Zoning densité, liquid cooling, orchestration workload.
 
-Sources:
- - https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/  
- - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive  
- - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html  
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-and-cooling/  
- - https://uptimeinstitute.com/resources
-
-
 ---
 
 ## Part G: Companies & Industry Landscape
@@ -608,7 +505,147 @@ Sources:
 | ABB | Transformers, switchgear | Utility-scale |
 | Caterpillar | Generators | Backup power |
 
-Sources:
+---
+
+## Part H: Summary Comparison
+
+### Cooling Technology Comparison
+
+| Aspect | Air Cooling | Rear-Door HX | Direct Liquid | Single-Phase Immersion | Two-Phase Immersion |
+|---|---|---|---|---|---|
+| Max kW/rack | ~20–50 kW | ~20–80 kW | ~50–200+ kW | ~80–250+ kW | ~100–300+ kW |
+| PUE achievable | ~1.2–1.6 | ~1.15–1.4 | ~1.05–1.2 | ~1.03 | ~1.02 |
+| Capital cost | Faible | Moyen | Élevé | Élevé | Très élevé |
+| Operating cost | Moyen/Élevé | Moyen | Faible/Moyen | Faible | Faible |
+| Maintenance | Simple | Moyenne | Moyenne/Complexe | Complexe | Très complexe |
+| Maturity | Très mature | Mature | Mature | Mature (commercial) | Plus niche |
+| GPU compatibility | Universelle | Universelle | Cold-plate requis | Matériel compatible immersion | Matériel compatible immersion |
+
+### AI System Power Summary
+
+| System | GPUs | Total Power | Cooling Method | Rack Density |
+|---|---|---:|---|---:|
+| DGX A100 | 8× A100 | ~6.5 kW | Air | Variable (dépend du nombre de serveurs/rack) |
+| DGX H100 | 8× H100 | ~10.2 kW | Air/DLC | Variable |
+| DGX B200 | 8× B200 | ~14.3 kW | DLC | Variable |
+| GB200 NVL72 | 72× B200 | ~120 kW | DLC | ~120 kW/rack |
+| AMD MI300X (8-way) | 8× MI300X | ~12.5 kW | Air | Variable |
+| Google TPU v5p pod | 8 960 TPU v5p chips | Non communiqué | DLC | Non communiqué |
+
+### Datacenter Efficiency Comparison
+
+| Operator | Facility Type | PUE | WUE | Cooling Method |
+|---|---|---:|---:|---|
+| Google | Hyperscale | 1.09 (2024) | Non communiqué (global public) | Mix (free cooling + liquid selon sites) |
+| Meta | Hyperscale | 1.08 (2023 avg) | WUE communiqué (voir rapport) | Mix (optimisations air + water systems) |
+| Microsoft | Azure | Non communiqué (global public) | Amélioration WUE (ordre de grandeur communiqué) | Mix (air + innovations “zéro eau” sur nouveaux sites) |
+| AWS | Cloud | 1.15 (global) | Non communiqué (global public) | Mix (air + optimisations) |
+| CoreWeave | AI-focused | 1.15 (site Barcelone annoncé) | “Zéro eau” annoncé (site Barcelone) | Air (free cooling) + design optimisé |
+| Lambda Labs | AI-focused | Non communiqué | Non communiqué | Non communiqué |
+
+### TCO Impact of Cooling Choice
+
+| Cost Component | Air Cooling | DLC | Immersion |
+|---|---:|---:|---:|
+| Capital ($/kW IT) | Faible | Élevé | Élevé/Très élevé |
+| Power cost ($/kW-yr) | Élevé (ventilos/HVAC) | Plus faible | Plus faible |
+| Maintenance ($/kW-yr) | Faible | Moyen | Élevé |
+| Floor space ($/kW-yr) | Élevé (densité limitée) | Plus faible | Plus faible |
+| 5-year TCO ($/kW) | Variable (souvent ↑ à haute densité) | Souvent ↓ à haute densité | Souvent ↓ si densité extrême |
+
+---
+
+## Sources
+
+### Part A
+ - https://www.nvidia.com
+ - https://www.tsmc.com/english/dedicatedFoundry/technology
+ - https://www.anandtech.com/  
+ - https://www.servethehome.com/
+ - https://www.nvidia.com/en-us/data-center/
+ - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
+ - https://www.anandtech.com/
+ - https://www.se.com/ww/en/work/solutions/for-business/data-centers-and-networks/
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/
+ - https://uptimeinstitute.com/resources/research-and-reports
+ - https://www.nvidia.com/en-us/data-center/
+ - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+ - https://engineering.fb.com/
+
+### Part B
+
+ - https://www.pcisig.com/specifications/pciexpress
+ - https://www.nvidia.com/en-us/geforce/news/12vhpwr-connector/
+ - https://www.pcisig.com/news/pcisig-introduces-12v-2x6-connector
+ - https://www.anandtech.com/show/17530/nvidia-12vhpwr-issues-and-analysis
+ - https://www.opencompute.org/documents/ocp-48v-dc-power-distribution
+ - https://www.nvidia.com/en-us/data-center/energy-efficiency/
+ - https://www.ti.com/power-management/48v.html
+ - https://www.analog.com/en/analog-dialogue/articles/why-48v.html
+ - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-chain/
+ - https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/data-center-ups-efficiency.html
+ - https://www.plugloadsolutions.com/80pluspowersupplies.aspx
+ - https://www.ti.com/power-management/vrm.html
+ - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html
+ - https://www.ti.com/power-management/vrm.html
+ - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html
+ - https://www.analog.com/en/analog-dialogue/articles/multiphase-buck-converters.html
+ - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
+
+### Part C
+
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/high-density-data-center-cooling/
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
+ - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
+ - https://www.nvidia.com/en-us/data-center/energy-efficiency/
+ - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
+ - https://www.coolingbestpractices.com/knowledge_center/whitepapers/direct_liquid_cooling
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+ - https://www.submer.com/immersion-cooling/  
+ - https://www.grcooling.com/immersion-cooling/  
+ - https://www.3m.com/3M/en_US/data-center-us/solutions/liquid-cooling/  
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/rear-door-heat-exchangers/  
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/rear-door-heat-exchanger/  
+ - https://www.asetek.com/liquid-cooling/technologies/rear-door-heat-exchanger/  
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+
+### Part D
+
+ - https://uptimeinstitute.com/resources/what-is-pue  
+ - https://www.google.com/about/datacenters/efficiency/  
+ - https://engineering.fb.com/2020/03/12/data-center-engineering/data-center-efficiency/  
+ - https://learn.microsoft.com/en-us/azure/sustainability/  
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+ - https://www.iea.org/reports/data-centres-and-data-transmission-networks
+
+### Part E
+
+ - https://uptimeinstitute.com/resources/what-is-pue  
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-and-cooling/  
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/  
+ - https://www.iea.org/reports/data-centres-and-data-transmission-networks  
+ - https://www.energy.gov/ne/articles/small-modular-reactors
+
+### Part F
+
+ - https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/  
+ - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive  
+ - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html  
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-and-cooling/  
+ - https://uptimeinstitute.com/resources
+
+### Part G
+
  - https://www.nvidia.com/en-us/data-center/  
  - https://www.dell.com/en-us/dt/servers/poweredge-xe.htm  
  - https://www.hpe.com/us/en/compute/hpc/cray-ex.html  
@@ -624,50 +661,21 @@ Sources:
  - https://new.abb.com/  
  - https://www.caterpillar.com/
 
----
+### Part H
 
-## Part H: Summary Comparison
-
-### Cooling Technology Comparison
-
-| Aspect | Air Cooling | Rear-Door HX | Direct Liquid | Single-Phase Immersion | Two-Phase Immersion |
-|---|---|---|---|---|---|
-| Max kW/rack | ? | ? | ? | ? | ? |
-| PUE achievable | ? | ? | ? | ? | ? |
-| Capital cost | ? | ? | ? | ? | ? |
-| Operating cost | ? | ? | ? | ? | ? |
-| Maintenance | ? | ? | ? | ? | ? |
-| Maturity | ? | ? | ? | ? | ? |
-| GPU compatibility | ? | ? | ? | ? | ? |
-
-### AI System Power Summary
-
-| System | GPUs | Total Power | Cooling Method | Rack Density |
-|---|---|---:|---|---:|
-| DGX A100 | 8× A100 | ~6.5 kW | Air | ? |
-| DGX H100 | 8× H100 | ~10.2 kW | Air/DLC | ? |
-| DGX B200 | 8× B200 | ~14.3 kW | DLC | ? |
-| GB200 NVL72 | 72× B200 | ~120 kW | DLC | ? |
-| AMD MI300X (8-way) | 8× MI300X | ? | ? | ? |
-| Google TPU v5p pod | ? | ? | ? | ? |
-
-### Datacenter Efficiency Comparison
-
-| Operator | Facility Type | PUE | WUE | Cooling Method |
-|---|---|---:|---:|---|
-| Google | Hyperscale | ? | ? | ? |
-| Meta | Hyperscale | ? | ? | ? |
-| Microsoft | Azure | ? | ? | ? |
-| AWS | Cloud | ? | ? | ? |
-| CoreWeave | AI-focused | ? | ? | ? |
-| Lambda Labs | AI-focused | ? | ? | ? |
-
-### TCO Impact of Cooling Choice
-
-| Cost Component | Air Cooling | DLC | Immersion |
-|---|---:|---:|---:|
-| Capital ($/kW IT) | ? | ? | ? |
-| Power cost ($/kW-yr) | ? | ? | ? |
-| Maintenance ($/kW-yr) | ? | ? | ? |
-| Floor space ($/kW-yr) | ? | ? | ? |
-| 5-year TCO ($/kW) | ? | ? | ? |
+ - https://images.nvidia.com/aem-dam/Solutions/Data-Center/nvidia-dgx-a100-datasheet.pdf
+ - https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html
+ - https://www.nvidia.com/en-us/data-center/dgx-b200/
+ - https://www.nvidia.com/en-us/data-center/gb200-nvl72/
+ - https://www.sunbirddcim.com/blog/your-data-center-ready-nvidia-gb200-nvl72
+ - https://www.dell.com/support/manuals/en-us/poweredge-xe9680/xe9680_ism_pub/safety-instructions?guid=guid-b85aa68d-c5c9-4ea1-8358-7388139bcfda&lang=en-us
+ - https://docs.cloud.google.com/tpu/docs/v5p
+ - https://cloud.google.com/blog/products/ai-machine-learning/introducing-cloud-tpu-v5p-and-ai-hypercomputer
+ - https://datacenters.google/efficiency
+ - https://sustainability.atmeta.com/wp-content/uploads/2024/08/Meta-2024-Sustainability-Report.pdf
+ - https://aws.amazon.com/sustainability/data-centers/
+ - https://www.microsoft.com/en-us/microsoft-cloud/blog/2024/12/09/sustainable-by-design-next-generation-datacenters-consume-zero-water-for-cooling/
+ - https://www.edged.es/news/coreweave-partners-with-edged
+ - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/rear-door-heat-exchangers/
+ - https://submer.com/blog/single-phase-vs-two-phase-immersion-cooling/
+ - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
