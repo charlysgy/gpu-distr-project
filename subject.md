@@ -21,8 +21,8 @@ GPU distribué 2026
 <!-- header: "AXE 6: Puissance & Refroidissement" -->
 
 ## Mission
-- Expliquer les enjeux de puissance et de refroidissmenet des infrastructure IA moderne
-- Comparer les technologie de refroidissement et analyser les astuces de design des datacenters
+- Expliquer les enjeux de puissance et de refroidissement des infrastructures IA modernes
+- Comparer les technologies de refroidissement et analyser les astuces de design des datacenters
 
 ---
 
@@ -30,7 +30,7 @@ GPU distribué 2026
 
 ---
 
-<!-- header: "Partie A : Evolution de la puissance des système IA" -->
+<!-- header: "Partie A : Evolution de la puissance des systèmes IA" -->
 
 ### Evolution de la puissance des GPU
 
@@ -143,7 +143,7 @@ GPU distribué 2026
 - Qu'est-ce que les phases et comment fonctionnent-elles ?
 <!-- Une phase = controleur + MOSFETs + inductance
 Les phases fonctionnent en parallèle pour partager le courant et réduire l'ondulation. -->
-- Pourquoi le rendement d'un VRm est important ?
+- Pourquoi le rendement d'un VRM est important ?
 <!-- Si le GPU consomme 1 kW d'éléctricité et possède un rendement de 90%, il dissipe donc 10% soit 100 W en chaleur qu'il faut évacuer. -->
 - Quels sont les défis thermiques ?
 <!-- Plusieurs défit :
@@ -202,7 +202,7 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 - Comment cela change-t-il la conception des datacenter?
 - Quels sont les considérations de sécurité?
 <!-- Pour réduire l'intensité qui circule dans les racks de très haute puissance et réduire par conséquent les pertes par effet Joule.
-Il y aurait moins d'étage de conversion donc moins de source de perte et meilleur acheminement du courant le long des racks.
+Il y aurait moins d'étages de conversion, donc moins de sources de perte et meilleur acheminement du courant le long des racks.
 
 DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure, de procédures et de conformité (personnel formé). -->
 
@@ -225,7 +225,7 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 - Quels sont les limites acoustiques?
 - Comment l'altitude affecte-t-elle le refroidissement par air?
 <!-- Par convection, l'élément chaud rechauffe l'air autour de lui, avec un ventilateur ou autre, l'air chaud est chassé, réablissant le déséquilibre de température. Le second principe de thermodynamique prend le relai en refroidissant l'élément chaud et en rechauffant l'air et ainsi de suite. -->
-<!-- Le but est d'optimisé la surface d'échange thermique entre l'élément chaud et l'air -->
+<!-- Le but est d'optimiser la surface d'échange thermique entre l'élément chaud et l'air -->
 <!-- Le refroissiement par convection a rendement plus faible que par conduction. -->
 <!-- Si l'air ambiant est chaud, celui-ci peut ne plus absorber assez de chaleur pour refroidir efficacement l'élément chaud -->
 <!-- ~750 W -->
