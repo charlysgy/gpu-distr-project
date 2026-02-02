@@ -756,128 +756,59 @@ Density zoning, liquid cooling, workload orchestration. -->
 
 <!-- header: "Sources" -->
 ### Part A
- - https://www.nvidia.com
- - https://www.tsmc.com/english/dedicatedFoundry/technology
- - https://www.anandtech.com/  
  - https://www.servethehome.com/
  - https://www.nvidia.com/en-us/data-center/
- - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
- - https://www.anandtech.com/
----
- - https://www.se.com/ww/en/work/solutions/for-business/data-centers-and-networks/
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/
  - https://uptimeinstitute.com/resources/research-and-reports
- - https://www.nvidia.com/en-us/data-center/
- - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
  - https://engineering.fb.com/
 
 ---
 
 ### Part B
 
- - https://www.pcisig.com/specifications/pciexpress
- - https://www.nvidia.com/en-us/geforce/news/12vhpwr-connector/
- - https://www.pcisig.com/news/pcisig-introduces-12v-2x6-connector
  - https://www.anandtech.com/show/17530/nvidia-12vhpwr-issues-and-analysis
- - https://www.opencompute.org/documents/ocp-48v-dc-power-distribution
- - https://www.nvidia.com/en-us/data-center/energy-efficiency/
- - https://www.ti.com/power-management/48v.html
----
- - https://www.analog.com/en/analog-dialogue/articles/why-48v.html
  - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
  - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-chain/
- - https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/data-center-ups-efficiency.html
- - https://www.plugloadsolutions.com/80pluspowersupplies.aspx
----
- - https://www.ti.com/power-management/vrm.html
- - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html
- - https://www.ti.com/power-management/vrm.html
- - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html
- - https://www.analog.com/en/analog-dialogue/articles/multiphase-buck-converters.html
- - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
 
 ---
 
 ### Part C
 
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/high-density-data-center-cooling/
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
- - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
----
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
- - https://www.nvidia.com/en-us/data-center/energy-efficiency/
- - https://www.servethehome.com/nvidia-gb200-nvl72-power-cooling-and-rack-scale-design/
- - https://www.coolingbestpractices.com/knowledge_center/whitepapers/direct_liquid_cooling
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
----
- - https://www.submer.com/immersion-cooling/  
- - https://www.grcooling.com/immersion-cooling/  
- - https://www.3m.com/3M/en_US/data-center-us/solutions/liquid-cooling/  
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-liquid-cooling/
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/rear-door-heat-exchangers/  
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/rear-door-heat-exchanger/ 
----
- - https://www.asetek.com/liquid-cooling/technologies/rear-door-heat-exchanger/  
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
+ - https://www.submer.com/immersion-cooling/
+ - https://www.grcooling.com/immersion-cooling/
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/rear-door-heat-exchanger/  
 
 ---
 
 ### Part D
 
- - https://uptimeinstitute.com/resources/what-is-pue  
- - https://www.google.com/about/datacenters/efficiency/  
- - https://engineering.fb.com/2020/03/12/data-center-engineering/data-center-efficiency/  
- - https://learn.microsoft.com/en-us/azure/sustainability/  
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
- - https://www.iea.org/reports/data-centres-and-data-transmission-networks
+ - https://www.google.com/about/datacenters/efficiency/
+ - https://aws.amazon.com/sustainability/data-centers/
+ - https://www.microsoft.com/en-us/microsoft-cloud/blog/2024/12/09/sustainable-by-design-next-generation-datacenters-consume-zero-water-for-cooling/
 
 ---
 
 ### Part E
 
- - https://uptimeinstitute.com/resources/what-is-pue  
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-and-cooling/  
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/  
- - https://www.iea.org/reports/data-centres-and-data-transmission-networks  
- - https://www.energy.gov/ne/articles/small-modular-reactors
+ - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
+ - https://uptimeinstitute.com/resources
 
 ---
 
 ### Part F
 
- - https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/  
- - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive  
- - https://www.intel.com/content/www/us/en/products/docs/processors/core/vrm-design-guide.html  
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments  
----
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/data-center-power-and-cooling/  
+ - https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/
+ - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
  - https://uptimeinstitute.com/resources
 
 ---
 
 ### Part G
 
- - https://www.nvidia.com/en-us/data-center/  
- - https://www.dell.com/en-us/dt/servers/poweredge-xe.htm  
- - https://www.hpe.com/us/en/compute/hpc/cray-ex.html  
- - https://www.supermicro.com/en/products/gpu  
- - https://www.lenovo.com/us/en/servers-storage/servers/thinksystem/  
- - https://www.vertiv.com/  
- - https://www.se.com/ww/en/work/solutions/for-business/data-centers-and-networks/  
----
- - https://www.asetek.com/data-center-liquid-cooling/  
- - https://www.coolitsystems.com/  
- - https://www.grcooling.com/  
- - https://www.submer.com/  
- - https://www.eaton.com/  
- - https://new.abb.com/  
- - https://www.caterpillar.com/
+ - https://www.nvidia.com/en-us/data-center/
+ - https://www.coolitsystems.com/
+ - https://www.grcooling.com/
+ - https://www.submer.com/
+ - https://new.abb.com/
 
 ---
 
@@ -888,8 +819,6 @@ Density zoning, liquid cooling, workload orchestration. -->
  - https://www.nvidia.com/en-us/data-center/dgx-b200/
  - https://www.nvidia.com/en-us/data-center/gb200-nvl72/
  - https://www.sunbirddcim.com/blog/your-data-center-ready-nvidia-gb200-nvl72
- - https://www.dell.com/support/manuals/en-us/poweredge-xe9680/xe9680_ism_pub/safety-instructions?guid=guid-b85aa68d-c5c9-4ea1-8358-7388139bcfda&lang=en-us
----
  - https://docs.cloud.google.com/tpu/docs/v5p
  - https://cloud.google.com/blog/products/ai-machine-learning/introducing-cloud-tpu-v5p-and-ai-hypercomputer
  - https://datacenters.google/efficiency
@@ -897,7 +826,4 @@ Density zoning, liquid cooling, workload orchestration. -->
  - https://aws.amazon.com/sustainability/data-centers/
  - https://www.microsoft.com/en-us/microsoft-cloud/blog/2024/12/09/sustainable-by-design-next-generation-datacenters-consume-zero-water-for-cooling/
  - https://www.edged.es/news/coreweave-partners-with-edged
----
- - https://www.vertiv.com/en-us/about/news-and-insights/articles/white-papers/rear-door-heat-exchangers/
  - https://submer.com/blog/single-phase-vs-two-phase-immersion-cooling/
- - https://www.ashrae.org/technical-resources/bookstore/thermal-guidelines-for-data-processing-environments
