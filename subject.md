@@ -756,74 +756,109 @@ Density zoning, liquid cooling, workload orchestration. -->
 
 <!-- header: "Sources" -->
 ### Part A
- - https://www.servethehome.com/
- - https://www.nvidia.com/en-us/data-center/
- - https://uptimeinstitute.com/resources/research-and-reports
- - https://engineering.fb.com/
+- https://images.nvidia.com/content/technologies/volta/pdf/volta-v100-datasheet-update-us-1165301-r5.pdf
+- https://www.horizoniq.com/blog/nvidia-a100-specs/
+- https://www.clarifai.com/blog/nvidia-h100#title_1
+- https://cyfuture.cloud/blog/v100-vs-h100-vs-a100-nvidia-tesla-gpu-comparison-guide/#Core_Architectural_Comparison_V100_vs_A100_vs_H100
+- https://docs.nvidia.com/dgx/dgxa100-user-guide/introduction-to-dgxa100.html#component-description
+---
+- https://www.amax.com/comparing-nvidia-blackwell-configurations/
+- https://flopper.io/system/nvidia-gb200-nvl72
+- https://axautikgroupllc.substack.com/p/here-is-how-much-power-we-expect
+
 
 ---
 
 ### Part B
 
- - https://www.anandtech.com/show/17530/nvidia-12vhpwr-issues-and-analysis
- - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
+- https://en.wikipedia.org/wiki/12VHPWR#Standard_for_connecting_GPUs_to_power_supplies
+- https://en.wikipedia.org/wiki/12VHPWR#Reliability_and_design_changes
+- https://blog.se.com/datacenter/2018/05/24/12v-vs-48v-the-rack-power-architecture-efficiency-calculator-illustrates-energy-savings-of-ocp-style-psus/
+---
+- https://www.jotrin.com/technology/details/voltage-regulator-module?srsltid=AfmBOorjHdTB74oXBs--yB8n8hgdWjcieQGzOH0SP1RhFnWyh-v15lQU
+- https://www.vicorpower.com/industries-and-innovations/vicor-48v/12v-48v-conversion
+
 
 ---
 
 ### Part C
 
- - https://www.submer.com/immersion-cooling/
- - https://www.grcooling.com/immersion-cooling/
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/rear-door-heat-exchanger/  
+- https://www.submer.com/immersion-cooling/#what-is-immersion-cooling
+- https://www.submer.com/blog/single-phase-vs-two-phase-immersion-cooling/
+- https://www.grcooling.com/immersion-cooling/#single-phase-immersion
+- https://www.grcooling.com/immersion-cooling/#two-phase-immersion
 
 ---
 
 ### Part D
 
- - https://www.google.com/about/datacenters/efficiency/
- - https://aws.amazon.com/sustainability/data-centers/
- - https://www.microsoft.com/en-us/microsoft-cloud/blog/2024/12/09/sustainable-by-design-next-generation-datacenters-consume-zero-water-for-cooling/
+- https://www.google.com/about/datacenters/efficiency/#measuring-efficiency
+- https://www.google.com/about/datacenters/efficiency/#pue
+- https://www.google.com/about/datacenters/efficiency/#cooling
+- https://aws.amazon.com/sustainability/data-centers/#Measuring_efficiency
+- https://aws.amazon.com/sustainability/data-centers/#Power_Usage_Effectiveness
+- https://www.microsoft.com/en-us/microsoft-cloud/blog/2024/12/09/sustainable-by-design-next-generation-datacenters-consume-zero-water-for-cooling/
+---
+- https://datacenters.google/efficiency
+- https://sustainability.atmeta.com/wp-content/uploads/2024/08/Meta-2024-Sustainability-Report.pdf
+- https://www.uptimeinstitute.com/resources/white-papers/understanding-pue
 
 ---
 
 ### Part E
 
- - https://www.schneider-electric.com/en/work/solutions/for-business/data-centers-and-networks/
- - https://uptimeinstitute.com/resources
+- https://www.uptimeinstitute.com/resources/white-papers/designing-for-high-density-data-centers
+- https://www.uptimeinstitute.com/resources/white-papers/power-distribution-in-the-data-center
+- https://www.iea.org/reports/electricity-grids-and-secure-energy-transitions
+- https://www.world-nuclear.org/information-library/nuclear-fuel-cycle/nuclear-power-reactors/small-nuclear-power-reactors.aspx
+
 
 ---
 
 ### Part F
 
- - https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/
- - https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive
- - https://uptimeinstitute.com/resources
+- https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/#power-management
+- https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/#clocking-and-voltage
+- https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive/3
+- https://www.anandtech.com/show/17626/nvidia-hopper-h100-architecture-deep-dive/4
+---
+- https://en.wikipedia.org/wiki/Dynamic_voltage_scaling
+- https://www.uptimeinstitute.com/resources/white-papers/thermal-management-in-the-data-center
+
 
 ---
 
 ### Part G
 
- - https://www.nvidia.com/en-us/data-center/
- - https://www.coolitsystems.com/
- - https://www.grcooling.com/
- - https://www.submer.com/
- - https://new.abb.com/
+- https://www.nvidia.com/en-us/data-center/dgx-platform/
+- https://www.dell.com/en-us/shop/poweredge-servers/sr/servers/poweredge-xe
+- https://www.vertiv.com/en-us/products-catalog/thermal-management/
+- https://www.coolitsystems.com/data-center/
+- https://www.grcooling.com/immersion-cooling/
+- https://www.submer.com/immersion-cooling/
+- https://www.submer.com/products/smartpod/
+---
+- https://www.liquidcoolsolutions.com/immersion-cooling/
+- https://new.abb.com/medium-voltage/switchgear
+
 
 ---
 
 ### Part H
 
- - https://images.nvidia.com/aem-dam/Solutions/Data-Center/nvidia-dgx-a100-datasheet.pdf
- - https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html
- - https://www.nvidia.com/en-us/data-center/dgx-b200/
- - https://www.nvidia.com/en-us/data-center/gb200-nvl72/
- - https://www.sunbirddcim.com/blog/your-data-center-ready-nvidia-gb200-nvl72
- - https://docs.cloud.google.com/tpu/docs/v5p
- - https://cloud.google.com/blog/products/ai-machine-learning/introducing-cloud-tpu-v5p-and-ai-hypercomputer
- - https://datacenters.google/efficiency
- - https://sustainability.atmeta.com/wp-content/uploads/2024/08/Meta-2024-Sustainability-Report.pdf
- - https://aws.amazon.com/sustainability/data-centers/
- - https://www.microsoft.com/en-us/microsoft-cloud/blog/2024/12/09/sustainable-by-design-next-generation-datacenters-consume-zero-water-for-cooling/
- - https://www.edged.es/news/coreweave-partners-with-edged
- - https://submer.com/blog/single-phase-vs-two-phase-immersion-cooling/
+- https://images.nvidia.com/aem-dam/Solutions/Data-Center/nvidia-dgx-a100-datasheet.pdf
+- https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html#power-specifications
+- https://www.nvidia.com/en-us/data-center/dgx-b200/
+- https://www.nvidia.com/en-us/data-center/gb200-nvl72/
+- https://www.sunbirddcim.com/blog/your-data-center-ready-nvidia-gb200-nvl72
+---
+- https://docs.cloud.google.com/tpu/docs/v5p#system_architecture
+- https://docs.cloud.google.com/tpu/docs/v5p#configurations
+- https://cloud.google.com/blog/products/ai-machine-learning/introducing-cloud-tpu-v5p-and-ai-hypercomputer
+- https://datacenters.google/efficiency
+- https://sustainability.atmeta.com/wp-content/uploads/2024/08/Meta-2024-Sustainability-Report.pdf
+- https://aws.amazon.com/sustainability/data-centers/
+---
+- https://www.microsoft.com/en-us/microsoft-cloud/blog/2024/12/09/sustainable-by-design-next-generation-datacenters-consume-zero-water-for-cooling/
+- https://www.edged.es/news/coreweave-partners-with-edged
+- https://submer.com/blog/single-phase-vs-two-phase-immersion-cooling/
