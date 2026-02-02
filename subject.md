@@ -7,44 +7,44 @@ paginate: true
 
 <!-- _class: lead -->
 
-# AXE 6: Puissance & Refroidissement
+# AXIS 6: Power & Cooling
 
-Charly Saugey
-Paul Haardt
-Corentin Colmel
+Charly Saugey  
+Paul Haardt  
+Corentin Colmel  
 
-Majeure Image / Epita
-GPU distribué 2026
+Image Major / Epita  
+Distributed GPU Systems 2026
 
 ---
 
-<!-- header: "AXE 6: Puissance & Refroidissement" -->
+<!-- header: "AXIS 6: Power & Cooling" -->
 
 ## Mission
-- Expliquer les enjeux de puissance et de refroidissmenet des infrastructure IA moderne
-- Comparer les technologie de refroidissement et analyser les astuces de design des datacenters
+- Explain the power and cooling challenges of modern AI infrastructures  
+- Compare cooling technologies and analyze datacenter design trade-offs
 
 ---
 
-## Partie A : Evolution de la puissance des système IA
+## Part A: Evolution of AI System Power
 
 ---
 
-<!-- header: "Partie A : Evolution de la puissance des système IA" -->
+<!-- header: "Part A: Evolution of AI System Power" -->
 
-### Evolution de la puissance des GPU
+### GPU Power Evolution
 
-**Questions clés**
-- Comment la consommation électrique des GPU a-t-elle évolué ?
-- Qu'est-ce qui provoque l’augmentation de la puissance ?
-- Existe-t-il une limite maximale à la puissance des GPU ?
-- Comment la puissance évolue-t-elle avec les performances ?
+**Key questions**
+- How has GPU power consumption evolved?
+- What is driving the increase in power?
+- Is there a maximum ceiling to GPU power?
+- How does power scale with performance?
 
 ---
 
 <style scoped>
   section {
-    font-size: 2.6em;
+    font-size: 2.1rem;
     padding: 0;
     padding-top: 100px;
   }
@@ -62,12 +62,12 @@ GPU distribué 2026
 ---
 <style scoped>
   section {
-    font-size: 2.7em;
+    font-size: 2.2rem;
     padding: 0;
     padding-top: 100px;
   }
 </style>
-**Puissance au niveau système (nœud complet)**
+**System-level power (full node)**
 
 | System | GPUs | GPU Power | Total System Power | Year |
 |---|---|---:|---:|---:|
@@ -80,12 +80,12 @@ GPU distribué 2026
 ---
 <style scoped>
   section {
-    font-size: 2.7em;
+    font-size: 2.2rem;
     padding: 0;
     padding-top: 100px;
   }
 </style>
-**Évolution de la densité de puissance des racks**
+**Evolution of rack power density**
 
 | Era | Typical Rack Power | kW/rack | Cooling Method |
 |---|---:|---:|---|
@@ -101,18 +101,18 @@ GPU distribué 2026
 
 ---
 
-<!-- header: "AXE 6: Puissance & Refroidissement" -->
-## Partie B: Distribution de puissance aux GPU
+<!-- header: "AXIS 6: Power & Cooling" -->
+## Part B: GPU Power Delivery
 
 ---
 
-<!-- header: "Partie B: Distribution de puissance aux GPU" -->
-### Comment fonctionne l’alimentation électrique d’un GPU ?
+<!-- header: "Part B: GPU Power Delivery" -->
+### How does GPU power delivery work?
 
-**Questions clés**
-- Du réseau électrique à la puce : quelles sont les étapes de conversion ?
-- Où se situent les pertes d’efficacité ?
-- Comment la puissance est-elle distribuée à l’intérieur d’un GPU ?
+**Key questions**
+- From grid to chip: what are the conversion stages?
+- Where do efficiency losses occur?
+- How is power distributed inside a GPU?
 
 ![center](power-delivery.png)
 
@@ -120,7 +120,7 @@ GPU distribué 2026
 
 <style scoped>
   section {
-    font-size: 2.5em;
+    font-size: 2.0rem;
     padding: 0;
     padding-top: 100px;
   }
@@ -135,21 +135,21 @@ GPU distribué 2026
 
 ---
 
-### Modules régulateurs de tension (VRM)
+### Voltage Regulator Modules (VRMs)
 
 **Questions**
-- Qu'est-ce que VRM et pourquoi est-ce un élément critique ?
-<!-- Le VRM est chargé de convertir le 12/48 V en tension < 1V pour les cors. Il est critique dans le sens où il exige une tension d'entrée stable et sans bruit. -->
-- Qu'est-ce que les phases et comment fonctionnent-elles ?
-<!-- Une phase = controleur + MOSFETs + inductance
-Les phases fonctionnent en parallèle pour partager le courant et réduire l'ondulation. -->
-- Pourquoi le rendement d'un VRm est important ?
-<!-- Si le GPU consomme 1 kW d'éléctricité et possède un rendement de 90%, il dissipe donc 10% soit 100 W en chaleur qu'il faut évacuer. -->
-- Quels sont les défis thermiques ?
-<!-- Plusieurs défit :
- - Réduire la perte de puissance d'entrée sous forme de chaleur
- - Limiter l'impact de la chaleur sur les performance
- - Evacuer la chaleur le plus efficacement possible -->
+- What is a VRM and why is it critical?
+<!-- The VRM converts 12 V / 48 V into sub-1 V supply for the cores. It is critical because it must provide stable, low-noise voltage. -->
+- What are phases and how do they work?
+<!-- One phase = controller + MOSFETs + inductor
+Phases operate in parallel to share current and reduce ripple. -->
+- Why is VRM efficiency important?
+<!-- If a GPU consumes 1 kW and VRM efficiency is 90%, then 10% (100 W) is dissipated as heat that must be removed. -->
+- What are the thermal challenges?
+<!-- Multiple challenges:
+ - Reduce input power losses converted to heat
+ - Limit thermal impact on performance
+ - Remove heat as efficiently as possible -->
 
 ---
 
@@ -163,28 +163,28 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 
 ---
 
-### Distribution de puissance 12V vs 48V
+### 12V vs 48V Power Distribution
 
-- En quoi le 48V est meilleur pour les systèmes de haute puissance?
-<!-- Parce qu'avec une tension 4 x plus élevée on diminue l'intensité par 4 pour avoir la même puissance tout en réduisant les pertes sous formes de chaleurs. -->
-- Qui promeut le 48V?
-<!-- Un peu tout le monde qui gravite autour des GPU -->
-- Quels sont les défis?
-<!-- Les VRM sont plus complexes, le risques de pont éléctrique entre deux composant unltra-proche est plus élevé, il faut assurer la compatibilité sur les appareils supports... -->
+- Why is 48V better for high-power systems?
+<!-- With 4× higher voltage, current is reduced by 4× for the same power, which strongly reduces resistive losses. -->
+- Who is pushing 48V adoption?
+<!-- Most GPU and hyperscale ecosystem players -->
+- What are the challenges?
+<!-- More complex VRMs, higher risk of electrical arcing between very close components, and compatibility requirements across devices -->
 
 ---
 
 | Aspect | 12V Distribution | 48V Distribution |
 |---|---|---|
-| Intensité pour 1kW | ~83 A | ~21 A |
-| Epaisseur du câble | Thick (high current) | Thinner |
-| Pertes par effet Joule | High (×16 vs 48V) | Much lower |
-| Taille du connecteur | Large / multiple pins | Smaller / fewer pins |
-| Adoption industrielle | Legacy servers | AI & hyperscale |
+| Current for 1kW | ~83 A | ~21 A |
+| Cable thickness | Thick (high current) | Thinner |
+| I²R losses | High (×16 vs 48V) | Much lower |
+| Connector size | Large / many pins | Smaller / fewer pins |
+| Industry adoption | Legacy servers | AI & hyperscale |
 
 ---
 
-### Considérations sur les connecteurs
+### Connector considerations
 
 | Connector | Max Power | Pins | Issues |
 |---|---:|---:|---|
@@ -194,43 +194,44 @@ Les phases fonctionnent en parallèle pour partager le courant et réduire l'ond
 
 ---
 
-### 800V DC pour les usines IA
+### 800V DC for AI factories
 
 **Questions**
-- Pourquoi NVIDIA promeut-t-il 800V DC?
-- Quels sont les avantages en termes d'efficacité?
-- Comment cela change-t-il la conception des datacenter?
-- Quels sont les considérations de sécurité?
-<!-- Pour réduire l'intensité qui circule dans les racks de très haute puissance et réduire par conséquent les pertes par effet Joule.
-Il y aurait moins d'étage de conversion donc moins de source de perte et meilleur acheminement du courant le long des racks.
+- Why is NVIDIA pushing 800V DC?
+- What efficiency gains are possible?
+- How does this change datacenter design?
+- What are the safety considerations?
+<!-- To reduce current inside ultra-high-power racks and therefore reduce resistive losses.
+Fewer conversion stages, fewer loss points, and better power delivery along racks.
 
-DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure, de procédures et de conformité (personnel formé). -->
+High-voltage DC = persistent arcs, higher insulation, stricter disconnection systems, procedures, and trained personnel -->
 
 ---
 
-<!-- header: "AXE 6: Puissance & Refroidissement" -->
-## Partie C: Technologies de refroidissement
+<!-- header: "AXIS 6: Power & Cooling" -->
+## Part C: Cooling Technologies
 
 ---
 
-<!-- header: "Partie C: Technologies de refroidissement" -->
-### Refroidissement par air
+<!-- header: "Part C: Cooling Technologies" -->
+### Air Cooling
 
 **Questions**
-- Comment fonctionne le refroidissement par air?
-- Quels sont les principes de conception d'un heat sink?
-- Quels sont les limites?
-- Quand le refroidissement par air échoue-t-il?
-- A quel TDP l'air devient inutil?
-- Quels sont les limites acoustiques?
-- Comment l'altitude affecte-t-elle le refroidissement par air?
-<!-- Par convection, l'élément chaud rechauffe l'air autour de lui, avec un ventilateur ou autre, l'air chaud est chassé, réablissant le déséquilibre de température. Le second principe de thermodynamique prend le relai en refroidissant l'élément chaud et en rechauffant l'air et ainsi de suite. -->
-<!-- Le but est d'optimisé la surface d'échange thermique entre l'élément chaud et l'air -->
-<!-- Le refroissiement par convection a rendement plus faible que par conduction. -->
-<!-- Si l'air ambiant est chaud, celui-ci peut ne plus absorber assez de chaleur pour refroidir efficacement l'élément chaud -->
+- How does air cooling work?
+- What are the design principles of a heat sink?
+- What are the limits?
+- When does air cooling fail?
+- At what TDP does air become impractical?
+- What are the acoustic limits?
+- How does altitude affect air cooling?
+<!-- By convection: the hot component heats surrounding air; with a fan or airflow, hot air is expelled, restoring temperature gradient.
+The second law of thermodynamics drives heat flow from hot component to cooler air repeatedly. -->
+<!-- Goal: maximize thermal exchange surface between hot component and air -->
+<!-- Convective cooling is less efficient than conductive cooling -->
+<!-- If ambient air is hot, it may no longer absorb enough heat -->
 <!-- ~750 W -->
-<!-- ~75dB -->
-<!-- altitude = air moins dense = refroidissmeent moins efficace pour un même volume d'air = débit plus élévé nécessaire -->
+<!-- ~75 dB -->
+<!-- Higher altitude = lower air density = less effective cooling for same airflow volume = higher airflow required -->
 
 ---
 
@@ -238,39 +239,39 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 |---|---:|---:|
 | Max heat dissipation per GPU | 400–600 W | ~700–800 W |
 | Max rack density | 20–40 kW | ~50 kW |
-| Airflow per rack | 85–170 $m^3m^{-1}$ | ~225 $m^3m^{-1}$  |
+| Airflow per rack | 85–170 $m^3m^{-1}$ | ~225 $m^3m^{-1}$ |
 | Fan power overhead | 5–10% | ~15% |
 
 ---
 
 ### Direct Liquid Cooling (DLC)
 
-**Comment fonctionne le DLC ?**
-- Conception et fixation des cold plates
-- Manifolds et systèmes de distribution
-- Types de fluides et débits
-- Rejet de chaleur (CDU, dry coolers, tours de refroidissement)
-<!-- Plaque métallique en contact direct avec GPU, chaleur transférée au fluide -->
-<!-- réseaux de tuyauterie qui distribuent le fluide vers chaque cold plate -->
-<!-- eau/glycol ou fluides diélectriques, débit optimisé pour ΔT cible -->
-<!-- CDU (unités de distribution de fluide) + échangeurs externes (dry coolers ou tours) -->
+**How does DLC work?**
+- Cold plate design and attachment
+- Manifolds and distribution systems
+- Coolant types and flow rates
+- Heat rejection (CDU, dry coolers, cooling towers)
+<!-- Metal plate in direct contact with GPU, heat transferred to fluid -->
+<!-- Piping networks distributing fluid to each cold plate -->
+<!-- Water/glycol or dielectric fluids, flow optimized for target ΔT -->
+<!-- CDU (Coolant Distribution Units) + external heat exchangers (dry coolers or cooling towers) -->
 
 ---
 
 <style scoped>
   section {
-    font-size: 2.5em;
+    font-size: 2.0rem;
     padding: 0;
     padding-top: 100px;
   }
 </style>
 | DLC Component | Function | Key Specifications |
 |---|---|---|
-| Cold plate | Transfert de chaleur du GPU vers le liquide | Surface alu/cuivre, low ΔT |
-| Manifold | Distribution du fluide aux cold plates | Multi-port, équilibrage de débit |
-| Quick disconnects | Connexions sans fuite pour maintenance | ≤ 0.5% fuite, haute pression |
-| CDU (Coolant Distribution Unit) | Pompe + échangeur + filtration | Débit 10–100 L/min, filtres |
-| Facility water loop | Rejet de chaleur vers le bâtiment | Dry coolers ou cooling towers |
+| Cold plate | Heat transfer from GPU to liquid | Aluminum/copper surface, low ΔT |
+| Manifold | Distribute fluid to cold plates | Multi-port, balanced flow |
+| Quick disconnects | Leak-free maintenance connections | ≤0.5% leakage, high pressure |
+| CDU (Coolant Distribution Unit) | Pump + heat exchanger + filtration | 10–100 L/min, filters |
+| Facility water loop | Reject heat to building | Dry coolers or cooling towers |
 
 ---
 
@@ -284,9 +285,10 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 | Operating cost | Higher fan energy | Lower pumping energy |
 
 ---
+
 <style scoped>
   section {
-    font-size: 2.4em;
+    font-size: 2.0rem;
     padding: 0;
     padding-top: 100px;
   }
@@ -302,18 +304,18 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 
 ### Immersion Cooling
 
-**Sujets**
-- Monophasé vs diphasé  
-- Conception des bacs et gestion des fluides  
-- Méthodes de rejet thermique  
-- Considérations de maintenance
+**Topics**
+- Single-phase vs two-phase  
+- Tank design and fluid management  
+- Heat rejection methods  
+- Maintenance considerations
 
 ---
 
 | Aspect | Single-Phase Immersion | Two-Phase Immersion |
 |---|---|---|
 | Fluid type | Dielectric oil | Low-boiling dielectric fluid |
-| Operating principle | Liquid absorbs heat, stays liquid | Liquid boils, vapor condenses |
+| Operating principle | Liquid absorbs heat, remains liquid | Liquid boils, vapor condenses |
 | Max heat flux | High | Very high |
 | Fluid cost | Medium | High |
 | Complexity | Medium | High |
@@ -333,54 +335,54 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 ### Rear-Door Heat Exchangers (RDHx)
 
 **Questions**
-- Qu'est-ce que RDHx ?  
-- Comment est-ce que cela aide le refroidissement à air ?  
-- Quelles puissances peut-il supporter ?  
-- Quand est-ce le bon choix ?  
-<!-- Un échangeur thermique air-liquide monté à l’arrière d’un rack qui capte l’air chaud sortant et en extrait la chaleur via un circuit d’eau. -->
-<!-- Il refroidit l’air directement au niveau du rack, réduisant la charge thermique de la salle et améliorant l’efficacité du refroidissement à air existant. -->
-<!-- Environ 20 000 à 80 000 W par rack selon le type (passif ou actif). -->
-<!-- Lorsqu’un datacenter refroidi à l’air doit supporter des racks plus denses sans passer immédiatement au liquid cooling direct ou à l’immersion. -->
+- What is RDHx?  
+- How does it supplement air cooling?  
+- What power densities can it support?  
+- When is it the right choice?  
+<!-- Air-to-liquid heat exchanger mounted at rear of rack that captures exhaust air and removes heat using a water loop -->
+<!-- It cools air locally at rack level, reducing room thermal load and improving efficiency of existing air cooling -->
+<!-- Roughly 20,000–80,000 W per rack depending on passive or active design -->
+<!-- When an air-cooled datacenter must support denser racks without immediate transition to DLC or immersion -->
 
 ---
 
 | RDHx Type | Cooling Capacity | Best For |
 |---|---:|---|
-| Passive RDHx | ~20 000–35 000 W par rack | Racks densité moyenne, retrofit |
-| Active RDHx | ~30 000–80 000 W par rack | Racks haute densité (GPU) |
+| Passive RDHx | ~20,000–35,000 W per rack | Medium-density racks, retrofit |
+| Active RDHx | ~30,000–80,000 W per rack | High-density GPU racks |
 
 ---
 
-<!-- header: "AXE 6 : Puissance & Refroidissement" -->
-## Partie D: Rendement énergétique (PUE)
+<!-- header: "AXIS 6: Power & Cooling" -->
+## Part D: Power Usage Effectiveness (PUE)
 
 ---
 
-<!-- header: "Partie D: Rendement énergétique (PUE)" -->
-### Comprendre le PUE
+<!-- header: "Part D: Power Usage Effectiveness (PUE)" -->
+### Understanding PUE
 
-**Définition**
-- PUE = Power Usage Effectiveness
+**Definition**
+- PUE = Power Usage Effectiveness  
 - PUE = Total Facility Power / IT Equipment Power  
 - 1 PUE = (IT Load + Cooling + Power Distribution + Lighting + Other) / IT Load
 
 ---
 
 **Questions**
-- Que mesure le PUE et que ne mesure-t-il pas ?
-- Comment le choix du refroidissement affecte-t-il le PUE ?
-- Quels sont les composants du surcoût énergétique ?
-<!-- PUE mesure l’efficacité énergétique de l’infrastructure du datacenter mais ne mesure pas l’efficacité des applications, des serveurs ou de l’usage des ressources IT. -->
-<!-- Refroidissement, pertes de distribution électrique, UPS, éclairage, sécurité, auxiliaires. -->
-<!-- Les solutions liquid cooling réduisent fortement l’énergie dédiée au refroidissement, ce qui diminue le PUE. -->
+- What does PUE measure and not measure?
+- How does cooling choice affect PUE?
+- What are the components of overhead?
+<!-- PUE measures datacenter infrastructure efficiency but not application, server, or workload efficiency -->
+<!-- Cooling, power distribution losses, UPS, lighting, security, auxiliary systems -->
+<!-- Liquid cooling solutions significantly reduce cooling energy and therefore PUE -->
 
 ---
 
 | PUE Component | Typical % of Overhead | Reduction Strategies |
 |---|---:|---|
-| Cooling | 40–60 % | DLC, free cooling, confinement |
-| Power distribution losses | 10–15 % | Haut rendement UPS/PSU |
-| Lighting and other | 5 % | LED, automatisation |
+| Cooling | 40–60 % | DLC, free cooling, containment |
+| Power distribution losses | 10–15 % | High-efficiency UPS/PSU |
+| Lighting and other | 5 % | LED, automation |
 
 ---
 
@@ -398,16 +400,15 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 
 | Cooling Method | Typical PUE | Why |
 |---|---:|---|
-| Traditional air (CRAC) | ~1.6 | Compresseurs énergivores |
-| Hot/cold aisle containment | ~1.4 | Airflow optimisé |
-| Free air cooling | ~1.2 | Peu de refroidissement actif |
-| Direct liquid cooling | ~1.1 | Transfert thermique direct |
-| Immersion cooling | ~1.05 | Quasi suppression HVAC |
+| Traditional air (CRAC) | ~1.6 | Energy-intensive compressors |
+| Hot/cold aisle containment | ~1.4 | Optimized airflow |
+| Free air cooling | ~1.2 | Minimal active cooling |
+| Direct liquid cooling | ~1.1 | Direct heat transfer |
+| Immersion cooling | ~1.05 | Near elimination of HVAC |
 
 ---
 
-**Exemples de référence (best-in-class)**
-<!-- Best-in-class = Les exemples optimaux pour les autres entreprises -->
+**Best-in-class examples**
 
 | Company | Facility | PUE | How Achieved |
 |---|---|---:|---|
@@ -418,47 +419,47 @@ DC haute tension = arcs persistants, exigences accrues d’isolation, de coupure
 
 ---
 
-**Au-delà du PUE : autres métriques d’efficacité**
+**Beyond PUE: other efficiency metrics**
 
 | Metric | Definition | Typical Values | Best-in-Class |
 |---|---|---|---|
-| PUE | Ratio total/IT | 1.1–1.6 | ~1.05 |
-| WUE | L d’eau / kWh IT | 0.2–1.8 | <0.2 |
+| PUE | Total/IT ratio | 1.1–1.6 | ~1.05 |
+| WUE | Liters water / kWh IT | 0.2–1.8 | <0.2 |
 | CUE | kgCO₂ / kWh IT | Variable | Near zero |
 
-<!-- WUE = Water Usage Efficiency -->
-<!-- CUE = Carbon Usage Efficiency -->
+<!-- WUE = Water Usage Effectiveness -->
+<!-- CUE = Carbon Usage Effectiveness -->
 
 ---
 
-<!-- header: "AXE 6 : Puissances & Refroidissement" -->
-## Partie E: Spécifications de l'infrastructure
+<!-- header: "AXIS 6: Power & Cooling" -->
+## Part E: Infrastructure Requirements
 
 ---
 
-<!-- header: "Partie E: Spécifications de l'infrastructure" -->
-### Planification de la densité de puissance
+<!-- header: "Part E: Infrastructure Requirements" -->
+### Power Density Planning
 
 **Questions**
-- Comment planifier l’augmentation de densité ?
-- Quelles mises à niveau d’infrastructure sont nécessaires ?
-- Comment gérer des densités mixtes ?
-<!-- Modular power and cooling, oversizing pathways, liquid-ready racks.
-Higher-capacity busways, transformers, UPS, liquid cooling loops.
-Zoning: air-cooled rows + liquid-cooled rows. -->
+- How do you plan for increasing density?
+- What infrastructure upgrades are needed?
+- How do you handle mixed densities?
+<!-- Modular power and cooling, oversizing pathways, liquid-ready racks -->
+<!-- Higher-capacity busways, transformers, UPS, liquid cooling loops -->
+<!-- Zoning: air-cooled rows + liquid-cooled rows -->
 
 ---
 
 | Density Tier | kW/Rack | Infrastructure Requirements |
 |---|---:|---|
-| Low density | 5 000–10 000 W | Air cooling, standard power |
-| Medium density | 10 000–30 000 W | Hot/cold aisle, high airflow |
-| High density | 30 000–80 000 W | RDHx or DLC |
-| Ultra-high density | >80 000 W | DLC or immersion |
+| Low density | 5,000–10,000 W | Air cooling, standard power |
+| Medium density | 10,000–30,000 W | Hot/cold aisle, high airflow |
+| High density | 30,000–80,000 W | RDHx or DLC |
+| Ultra-high density | >80,000 W | DLC or immersion |
 
 ---
 
-### Architecture de distribution électrique
+### Power distribution architecture
 
 | Component | Function | Sizing Consideration |
 |---|---|---|
@@ -470,17 +471,17 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-### Planification de capacité de refroidissement
+### Cooling capacity planning
 
 | Cooling capacity Unit | Conversion | Context |
 |---|---|---|
-| 1 ton of cooling | 12 000 BTU/h | 3.52 kW |
+| 1 ton of cooling | 12,000 BTU/h | 3.52 kW |
 | 1 kW IT load (air) | 0.0003 ton | Includes overhead |
 | 1 kW IT load (DLC) | 0.00028 ton | Direct rejection |
 
 ---
 
-**Besoins en eau pour le refroidissement liquide**
+**Water requirements for liquid cooling**
 
 | Cooling Method | Water Usage | m³/h per MW |
 |---|---|---:|
@@ -490,7 +491,7 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-### Systèmes d’alimentation de secours
+### Backup power systems
 
 | UPS Type | Efficiency | Runtime | Best For |
 |---|---:|---:|---|
@@ -501,7 +502,7 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-**Exigences des générateurs**
+**Generator requirements**
 
 | Facility Size | Generator Capacity | Fuel Storage | Startup Time |
 |---:|---|---|---|
@@ -512,7 +513,7 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-### Connexion réseau pour sites à l’échelle du GigaWatt
+### Grid connection for gigawatt-scale sites
 
 | Scale | Grid Requirements | Typical Lead Time |
 |---:|---|---|
@@ -522,14 +523,15 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 | 1 GW+ | New transmission lines | 5+ years |
 
 ---
+
 <style scoped>
   section {
-    font-size: 2.3em;
+    font-size: 1.8rem;
     padding: 0;
     padding-top: 100px;
   }
 </style>
-### Stratégies d’approvisionnement énergétique
+### Power sourcing strategies
 
 | Strategy | Description | Pros | Cons |
 |---|---|---|---|
@@ -541,87 +543,87 @@ Zoning: air-cooled rows + liquid-cooled rows. -->
 
 ---
 
-<!-- header: "AXE 6 : Puissance & Refroidissement" -->
-## Partie F: Sujets approfondis
+<!-- header: "AXIS 6: Power & Cooling" -->
+## Part F: Deep Dive Topics
 
 ---
 
-<!-- header: "Partie F: Sujets approfondis" -->
-### Gestion de l’énergie au niveau puce
+<!-- header: "Part F: Deep Dive Topics" -->
+### Chip-Level Power Management
 
-**Mise à l’échelle dynamique tension/fréquence (DVFS)**
-- Comment fonctionne le DVFS ?
-- Quelle est la relation puissance/fréquence ?
-<!-- Le processeur ajuste dynamiquement la tension et la fréquence selon la charge et la température.
-La puissance dynamique suit approximativement : P ∝ V² × f. -->
+**Dynamic Voltage and Frequency Scaling (DVFS)**
+- How does DVFS work?
+- What is the power/frequency relationship?
+<!-- The processor dynamically adjusts voltage and frequency based on workload and temperature.
+Dynamic power approximately follows: P ∝ V² × f -->
 
 ---
 
 | Power State | Voltage | Frequency | Power | Use Case |
 |---|---:|---:|---:|---|
-| Max boost | Élevée | Élevée | Très élevée | Peak compute |
-| Base clock | Nominale | Nominale | Élevée | Sustained |
-| Idle | Basse | Basse | Faible | Low utilization |
-| Sleep | Très basse | ~0 | Très faible | Inactive |
+| Max boost | High | High | Very high | Peak compute |
+| Base clock | Nominal | Nominal | High | Sustained |
+| Idle | Low | Low | Low | Low utilization |
+| Sleep | Very low | ~0 | Very low | Inactive |
 
 ---
 
-### Comportement du throttling thermique
+### Thermal throttling behavior
 
 | Threshold | Temperature | Action |
 |---|---|---|
-| Target | ~83 °C | Fréquence nominale |
-| Throttle start | ~85 °C | Réduction fréquence |
-| Max operating | ~90 °C | Limitation puissance |
-| Shutdown | ~95 °C | Arrêt matériel |
+| Target | ~83 °C | Nominal frequency |
+| Throttle start | ~85 °C | Frequency reduction |
+| Max operating | ~90 °C | Power limiting |
+| Shutdown | ~95 °C | Hardware shutdown |
 
 ---
 
-### Conception des dissipateurs et cold plates
+### Heat sink and cold plate design
 
 | Parameter | Impact | Tradeoff |
 |---|---|---|
-| Fin density | Surface d’échange | Restriction airflow |
-| Base thickness | Diffusion chaleur | Masse |
-| Heat pipe count | Transport chaleur | Coût |
-| Material (Cu vs Al) | Conductivité | Poids / prix |
+| Fin density | Heat transfer surface | Airflow restriction |
+| Base thickness | Heat spreading | Mass |
+| Heat pipe count | Heat transport | Cost |
+| Material (Cu vs Al) | Thermal conductivity | Weight / price |
 
 ---
 
 | Design Aspect | Consideration | Best Practice |
 |---|---|---|
-| Contact area | Résistance thermique | Couverture maximale |
-| Channel design | Turbulence | Micro-canaux |
-| Flow rate | ΔT liquide | Suffisant sans excès |
-| Pressure drop | Charge pompe | Minimiser |
+| Contact area | Thermal resistance | Maximum coverage |
+| Channel design | Turbulence | Microchannels |
+| Flow rate | Liquid ΔT | Sufficient, not excessive |
+| Pressure drop | Pump load | Minimize |
 
 ---
 
-### Puissance échouée (« Stranded Power ») dans les datacenters
+### Stranded Power in Datacenters
 
 **Questions**
-- Qu’est-ce que la puissance échouée ?
-- Pourquoi apparaît-elle ?
-- Quelle part de puissance est typiquement échouée ?
-- Comment minimiser cette capacité perdue ? 
-<!-- Puissance électrique installée mais inutilisable.
-Limites de refroidissement ou déséquilibre rack-level.
-10–30 % de capacité.
-Zoning densité, liquid cooling, orchestration workload. -->
+- What is stranded power?
+- Why does it occur?
+- How much power is typically stranded?
+- How do you minimize stranded capacity?
+<!-- Installed electrical capacity that cannot be used.
+Cooling limits or rack-level imbalance.
+10–30% of capacity.
+Density zoning, liquid cooling, workload orchestration. -->
 
 ---
 
-<!-- header: "AXE 6 : Puissance & Refroidissement" -->
-## Partie G: Entreprises & paysage industriel
+<!-- header: "AXIS 6: Power & Cooling" -->
+## Part G: Companies & Industry Landscape
 
 ---
 
-<!-- header: "Partie G: Entreprises & paysage industriel" -->
-### Constructeurs de systèmes
+<!-- header: "Part G: Companies & Industry Landscape" -->
+### System Vendors
 
 | Company | Products | Cooling Approach | Market Position |
 |---|---|---|---|
-| NVIDIA | DGX, MGX, HGX | Air + DLC ready | Leader AI platforms |
+| NVIDIA | DGX, MGX, HGX | Air + DLC ready | AI platform leader |
 | Dell | PowerEdge XE | Air + DLC | Enterprise AI servers |
 | HPE | Cray EX | DLC | HPC & AI leader |
 
@@ -630,15 +632,15 @@ Zoning densité, liquid cooling, orchestration workload. -->
 | Company | Products | Cooling Approach | Market Position |
 |---|---|---|---|
 | Supermicro | GPU servers | Air + DLC | Broad OEM supplier |
-| Lenovo | ThinkSystem | Air + DLC | Enterprise/HPC |
+| Lenovo | ThinkSystem | Air + DLC | Enterprise / HPC |
 
 ---
 
-### Fournisseurs d’infrastructure de refroidissement
+### Cooling Infrastructure Vendors
 
 | Company | Products | Technology Focus |
 |---|---|---|
-| Vertiv | Liebert, CDUs | Full stack cooling |
+| Vertiv | Liebert, CDUs | Full-stack cooling |
 | Schneider Electric | APC, cooling | Power + thermal |
 | Asetek | Cold plates, CDUs | DLC pioneer |
 | CoolIT | DLC systems | Rack-level DLC |
@@ -648,7 +650,7 @@ Zoning densité, liquid cooling, orchestration workload. -->
 
 ---
 
-### Fournisseurs d’infrastructure électrique
+### Power Infrastructure Vendors
 
 | Company | Products | Specialty |
 |---|---|---|
@@ -660,88 +662,90 @@ Zoning densité, liquid cooling, orchestration workload. -->
 
 ---
 
-<!-- header: "AXE 6 : Puissance & Refroidissement" -->
-## Partie H: Comparaison finale
+<!-- header: "AXIS 6: Power & Cooling" -->
+## Part H: Final Comparison
 
 ---
 
 <style scoped>
   section {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     padding: 0;
     padding-top: 100px
   }
 </style>
-<!-- header: "Partie H: Comparaison finale" -->
+<!-- header: "Part H: Final Comparison" -->
 
-### Comparaison des technologies de refroidissement
-
+### Cooling Technology Comparison
 
 | Aspect | Air Cooling | Rear-Door HX | Direct Liquid | Single-Phase Immersion | Two-Phase Immersion |
 |---|---|---|---|---|---|
 | Max kW/rack | ~20–50 kW | ~20–80 kW | ~50–200+ kW | ~80–250+ kW | ~100–300+ kW |
 | PUE achievable | ~1.2–1.6 | ~1.15–1.4 | ~1.05–1.2 | ~1.03 | ~1.02 |
-| Capital cost | Faible | Moyen | Élevé | Élevé | Très élevé |
-| Operating cost | Moyen/Élevé | Moyen | Faible/Moyen | Faible | Faible |
-| Maintenance | Simple | Moyenne | Moyenne/Complexe | Complexe | Très complexe |
-| Maturity | Très mature | Mature | Mature | Mature (commercial) | Plus niche |
-| GPU compatibility | Universelle | Universelle | Cold-plate requis | Matériel compatible immersion | Matériel compatible immersion |
+| Capital cost | Low | Medium | High | High | Very high |
+| Operating cost | Medium/High | Medium | Low/Medium | Low | Low |
+| Maintenance | Simple | Moderate | Moderate/Complex | Complex | Very complex |
+| Maturity | Very mature | Mature | Mature | Mature (commercial) | More niche |
+| GPU compatibility | Universal | Universal | Cold plate required | Immersion-compatible hardware | Immersion-compatible hardware |
 
 ---
+
 <style scoped>
   section {
-    font-size: 2.1em;
+    font-size: 1.7rem;
     padding: 0;
     padding-top: 100px
   }
 </style>
-### Résumé de puissance des systèmes IA
+### AI System Power Summary
 
 | System | GPUs | Total Power | Cooling Method | Rack Density |
 |---|---|---:|---|---:|
-| DGX A100 | 8× A100 | ~6.5 kW | Air | Variable (dépend du nombre de serveurs/rack) |
-| DGX H100 | 8× H100 | ~10.2 kW | Air/DLC | Variable |
+| DGX A100 | 8× A100 | ~6.5 kW | Air | Variable (depends on servers per rack) |
+| DGX H100 | 8× H100 | ~10.2 kW | Air / DLC | Variable |
 | DGX B200 | 8× B200 | ~14.3 kW | DLC | Variable |
 | GB200 NVL72 | 72× B200 | ~120 kW | DLC | ~120 kW/rack |
 | AMD MI300X (8-way) | 8× MI300X | ~12.5 kW | Air | Variable |
-| Google TPU v5p pod | 8 960 TPU v5p chips | Non communiqué | DLC | Non communiqué |
+| Google TPU v5p pod | 8,960 TPU v5p chips | Not disclosed | DLC | Not disclosed |
 
 ---
+
 <style scoped>
   section {
-    font-size: 1.7em;
+    font-size: 1.4rem;
     padding: 0;
     padding-top: 100px
   }
 </style>
-### Comparaison d’efficacité des datacenters
+### Datacenter Efficiency Comparison
 
 | Operator | Facility Type | PUE | WUE | Cooling Method |
 |---|---|---:|---:|---|
-| Google | Hyperscale | 1.09 (2024) | Non communiqué (global public) | Mix (free cooling + liquid selon sites) |
-| Meta | Hyperscale | 1.08 (2023 avg) | WUE communiqué (voir rapport) | Mix (optimisations air + water systems) |
-| Microsoft | Azure | Non communiqué (global public) | Amélioration WUE (ordre de grandeur communiqué) | Mix (air + innovations “zéro eau” sur nouveaux sites) |
-| AWS | Cloud | 1.15 (global) | Non communiqué (global public) | Mix (air + optimisations) |
-| CoreWeave | AI-focused | 1.15 (site Barcelone annoncé) | “Zéro eau” annoncé (site Barcelone) | Air (free cooling) + design optimisé |
-| Lambda Labs | AI-focused | Non communiqué | Non communiqué | Non communiqué |
+| Google | Hyperscale | 1.09 (2024) | Not publicly disclosed (global) | Mix (free cooling + liquid depending on site) |
+| Meta | Hyperscale | 1.08 (2023 avg) | WUE reported (see sustainability report) | Mix (air optimizations + water systems) |
+| Microsoft | Azure | Not publicly disclosed (global) | WUE improvement reported | Mix (air + “zero-water” innovations on new sites) |
+| AWS | Cloud | 1.15 (global) | Not publicly disclosed (global) | Mix (air + optimizations) |
+| CoreWeave | AI-focused | 1.15 (Barcelona site announced) | “Zero water” announced (Barcelona site) | Free air + optimized design |
+| Lambda Labs | AI-focused | Not disclosed | Not disclosed | Not disclosed |
 
 ---
+
 <style scoped>
   section {
-    font-size: 2.2em;
+    font-size: 1.8rem;
     padding: 0;
     padding-top: 100px
   }
 </style>
-### Impact du choix de refroidissement sur le TCO
+### TCO Impact of Cooling Choice
 
 | Cost Component | Air Cooling | DLC | Immersion |
 |---|---:|---:|---:|
-| Capital ($/kW IT) | Faible | Élevé | Élevé/Très élevé |
-| Power cost ($/kW-yr) | Élevé (ventilos/HVAC) | Plus faible | Plus faible |
-| Maintenance ($/kW-yr) | Faible | Moyen | Élevé |
-| Floor space ($/kW-yr) | Élevé (densité limitée) | Plus faible | Plus faible |
-| 5-year TCO ($/kW) | Variable (souvent ↑ à haute densité) | Souvent ↓ à haute densité | Souvent ↓ si densité extrême |
+| Capital ($/kW IT) | Low | High | High / Very high |
+| Power cost ($/kW-yr) | High (fans/HVAC) | Lower | Lower |
+| Maintenance ($/kW-yr) | Low | Medium | High |
+| Floor space ($/kW-yr) | High (limited density) | Lower | Lower |
+| 5-year TCO ($/kW) | Variable (often higher at high density) | Often lower at high density | Often lower if extreme density |
 
 ---
 
